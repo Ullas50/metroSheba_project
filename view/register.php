@@ -135,7 +135,7 @@
         </form>
     </section>
 </div>
-
+  <!-- Yeasib -->
 <script src="../public/js/register.js"></script>
 <?php include 'partials/footer.php'; ?>
 </body>
