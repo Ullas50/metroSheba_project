@@ -21,6 +21,7 @@ if (!isset($_SESSION['user_id'])) {
     <title>MetroSheba | Book Ticket</title>
 
     <!-- YOUR MAIN DESIGN CSS -->
+    <link rel="stylesheet" href="../public/css/passenger.css">
     <link rel="stylesheet" href="../public/css/home.css">
 </head>
 <body>
@@ -99,6 +100,7 @@ document.addEventListener("click", e => {
 window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
         window.location.href = "login.php";
+
     }
 });
 </script>

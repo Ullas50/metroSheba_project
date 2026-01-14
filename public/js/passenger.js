@@ -130,5 +130,7 @@ document.getElementById("bookingForm").addEventListener("submit", async e => {
         return;
     }
 
-    window.location.href = "ticket_summary.php";
+    window.location.href = "payment_page.php";
+;
+;
 });
