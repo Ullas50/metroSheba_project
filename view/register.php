@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +15,8 @@
 
 <?php include 'partials/header.php'; ?>
 
-<!-- MAIN SPLIT CONTAINER -->
 <div class="register-page">
 
-    <!-- LEFT SIDE IMAGE -->
     <div class="register-image">
         <img src="../public/images/register.jpg" alt="MetroSheba">
         <div class="image-overlay">
@@ -24,23 +25,29 @@
         </div>
     </div>
 
-    <!-- RIGHT SIDE (YOUR EXISTING FORM, UNTOUCHED) -->
     <section class="register-container">
 
-        <!-- HEADER -->
         <div class="register-header">
             <h2>Registration</h2>
             <p>Quickly register to book your metro train tickets</p>
         </div>
 
-        <!-- FORM (UNCHANGED) -->
+        <!-- ERROR BOX -->
+        <?php
+        if (!empty($_SESSION['errors'])) {
+            echo '<div class="error-box">';
+            foreach ($_SESSION['errors'] as $err) {
+                echo '<p>' . htmlspecialchars($err) . '</p>';
+            }
+            echo '</div>';
+            unset($_SESSION['errors']);
+        }
+        ?>
+
         <form id="registrationForm"
               method="POST"
               action="../controller/registerController.php"
               enctype="multipart/form-data">
-
-            <!-- EVERYTHING BELOW IS YOUR ORIGINAL CODE -->
-            <!-- NO FIELD MODIFIED -->
 
             <!-- NAME -->
             <div class="row">
@@ -49,7 +56,6 @@
                     <input type="text" id="firstName" name="firstName">
                     <small id="firstNameError" class="error"></small>
                 </div>
-
                 <div>
                     <label>Last Name</label>
                     <input type="text" id="lastName" name="lastName">
@@ -58,71 +64,53 @@
             </div>
 
             <!-- EMAIL -->
-            <div>
-                <label>Email</label>
-                <input type="text" id="email" name="email">
-                <small id="emailError" class="error"></small>
-            </div>
+            <label>Email</label>
+            <input type="text" id="email" name="email">
+            <small id="emailError" class="error"></small>
 
             <!-- PHONE -->
-            <div>
-                <label>Mobile Number</label>
-                <input type="text" id="phone" name="phone">
-                <small id="phoneError" class="error"></small>
-            </div>
+            <label>Mobile Number</label>
+            <input type="text" id="phone" name="phone">
+            <small id="phoneError" class="error"></small>
 
-            <!-- DATE OF BIRTH -->
-            <div>
-                <label>Date of Birth</label>
-                <div class="date-input-wrapper">
-                    <input type="date" id="dob" name="dob">
-                </div>
-                <small id="dobError" class="error"></small>
-            </div>
+            <!-- DOB -->
+            <label>Date of Birth</label>
+            <input type="date" id="dob" name="dob">
+            <small id="dobError" class="error"></small>
 
             <!-- GENDER -->
-            <div>
-                <label>Gender</label>
-                <div class="radio-group">
-                    <label><input type="radio" name="gender" value="male"> Male</label>
-                    <label><input type="radio" name="gender" value="female"> Female</label>
-                    <label><input type="radio" name="gender" value="other"> Other</label>
-                </div>
-                <small id="genderError" class="error"></small>
+            <label>Gender</label>
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="male"> Male</label>
+                <label><input type="radio" name="gender" value="female"> Female</label>
+                <label><input type="radio" name="gender" value="other"> Other</label>
             </div>
+            <small id="genderError" class="error"></small>
 
             <!-- NID -->
-            <div>
-                <label>NID Number</label>
-                <input type="text" id="nidNumber" name="nidNumber">
-                <small id="nidNumberError" class="error"></small>
-            </div>
+            <label>NID Number</label>
+            <input type="text" id="nidNumber" name="nidNumber">
+            <small id="nidNumberError" class="error"></small>
 
             <!-- PASSWORD -->
-            <div>
-                <label>Password</label>
-                <input type="password" id="password" name="password">
-                <small id="passwordError" class="error"></small>
-            </div>
+            <label>Password</label>
+            <input type="password" id="password" name="password">
+            <small id="passwordError" class="error"></small>
 
-            <!-- CONFIRM PASSWORD -->
-            <div>
-                <label>Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword">
-                <small id="confirmPasswordError" class="error"></small>
-            </div>
+            <!-- CONFIRM -->
+            <label>Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword">
+            <small id="confirmPasswordError" class="error"></small>
 
             <!-- PHOTO -->
-            <div>
-                <label>Profile Photo</label>
-                <input type="file" id="profile-photo" name="profile-photo">
-                <small id="profilePhotoError" class="error"></small>
-            </div>
+            <label>Profile Photo</label>
+            <input type="file" id="profile-photo" name="profile-photo">
+            <small id="profilePhotoError" class="error"></small>
 
             <!-- TERMS -->
             <div class="terms">
-                <input type="checkbox" id="terms">
-                I agree to the <a href="#">Terms & Conditions</a>
+                <input type="checkbox" id="terms" name="terms">
+                I agree to the Terms & Conditions
                 <small id="termsError" class="error"></small>
             </div>
 
@@ -135,7 +123,7 @@
         </form>
     </section>
 </div>
-  <!-- Yeasib -->
+
 <script src="../public/js/register.js"></script>
 <?php include 'partials/footer.php'; ?>
 </body>
