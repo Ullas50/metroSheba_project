@@ -1,0 +1,287 @@
+/* =========================
+   PASSWORD TOGGLE
+========================= */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 40px; /* space for icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #777;
+    transition: color 0.2s ease;
+
+    /* 🔥 MICRO ADJUSTMENT */
+    line-height: 1;
+}
+.toggle-password {
+    margin-top: -4px;
+}
+
+
+
+.toggle-password:hover {
+    color: var(--metro-blue);
+}
+
+/* =========================
+   ROOT VARIABLES
+========================= */
+:root {
+    --metro-blue: #1e88e5;
+    --metro-blue-dark: #1565c0;
+    --border-default: #ccc;
+    --text-dark: #222;
+}
+
+/* =========================
+   GLOBAL RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   PAGE LAYOUT
+========================= */
+.login-page {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================
+   LEFT IMAGE PANEL
+========================= */
+.login-image {
+    width: 50%;
+    background: #9e9e9e;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.login-image h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.login-image p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* =========================
+   RIGHT FORM PANEL
+========================= */
+.login-form-container {
+    width: 50%;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form-container h2 {
+    font-size: 28px;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+}
+
+/* =========================
+   LABELS
+========================= */
+.login-form-container label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+    color: var(--text-dark);
+}
+
+/* =========================
+   INPUTS
+========================= */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--border-default);
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    transition: 
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* INPUT HOVER */
+input[type="text"]:hover,
+input[type="password"]:hover {
+    border-color: var(--metro-blue);
+}
+
+/* INPUT FOCUS */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--metro-blue);
+    box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.15);
+}
+
+/* =========================
+   ERROR MESSAGE
+========================= */
+.form-error {
+    background: #fdecea;
+    color: #b71c1c;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #f5c6cb;
+    font-size: 14px;
+    margin-bottom: 15px;
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   REMEMBER ME
+========================= */
+.remember-row {
+    margin: 10px 0 18px;
+}
+
+.remember-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    color: var(--text-dark);
+    transition: color 0.2s ease;
+}
+
+.remember-label:hover {
+    color: var(--metro-blue);
+}
+
+.remember-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    position: relative;
+    top: -1px;
+    cursor: pointer;
+    accent-color: var(--metro-blue);
+}
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+button {
+    width: 100%;
+    padding: 13px;
+    background: var(--metro-blue);
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 
+        background-color 0.25s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+button:hover {
+    background: var(--metro-blue-dark);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================
+   LINKS
+========================= */
+.links {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.links a {
+    color: var(--metro-blue);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.links a:hover {
+    color: var(--metro-blue-dark);
+    text-decoration: underline;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+    .login-page {
+        flex-direction: column;
+    }
+
+    .login-image,
+    .login-form-container {
+        width: 100%;
+    }
+
+    .login-image {
+        min-height: 220px;
+    }
+}
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER + FOOTER stay natural height */
+
+.page-wrapper {
+    flex: 1;              /* 🔥 THIS IS THE MAGIC */
+    display: flex;
+}
+
+/* Login page fills remaining space */
+.login-page {
+    flex: 1;
+    display: flex;
+}
+

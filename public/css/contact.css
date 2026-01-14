@@ -1,0 +1,84 @@
+/* CONTACT PAGE */
+.contact-page {
+    padding: 80px 0;
+    background: #f7f9fc;
+}
+
+/* Title */
+.contact-title {
+    font-size: 36px;
+    color: #1f3a5f;
+    margin-bottom: 10px;
+}
+
+.contact-subtitle {
+    color: #666;
+    margin-bottom: 50px;
+}
+
+/* Cards layout */
+.contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+/* Individual card */
+.contact-card {
+    background: #fff;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    text-align: center;
+
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+}
+
+/* Stagger animation */
+.contact-card:nth-child(1) { animation-delay: 0.1s; }
+.contact-card:nth-child(2) { animation-delay: 0.2s; }
+.contact-card:nth-child(3) { animation-delay: 0.3s; }
+.contact-card:nth-child(4) { animation-delay: 0.4s; }
+.contact-card:nth-child(5) { animation-delay: 0.5s; }
+
+.contact-card h3 {
+    font-size: 20px;
+    color: #1f3a5f;
+    margin-bottom: 10px;
+}
+
+.contact-number {
+    font-size: 26px;
+    color: #1e88e5;
+    font-weight: bold;
+}
+
+/* Hover effect */
+.contact-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+}
+
+/* Email section */
+.contact-email {
+    margin-top: 60px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.contact-email h3 {
+    color: #1f3a5f;
+    margin-bottom: 10px;
+}
+
+/* Animation keyframe */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
