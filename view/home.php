@@ -22,7 +22,7 @@
         <!-- From -->
         <div class="field">
             <label>From</label>
-            <select>
+            <select required>
                 <option>Select Departure Station</option>
                 <option>Uttara North</option>
                 <option>Uttara Center</option>
