@@ -388,4 +388,127 @@ nav .nav-link:hover::after {
     color: #1e88e5;
     font-weight: bold;
 }
+#totalPrice {
+    color: #0b5ed7;
+    font-size: 18px;
+}
+
+#message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+.divider-line {
+    height: 1px;
+    background: #e0e0e0;
+    margin: 15px 0;
+}
+
+#totalPrice {
+    color: #0b5ed7;
+    font-size: 18px;
+}
+
+#message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.fare-box {
+    margin-top: 15px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.fare-box h4 {
+    margin: 0 0 10px;
+    color: #1e88e5;
+}
+
+.fare-box table {
+    width: 100%;
+    font-size: 14px;
+}
+
+.fare-box th {
+    text-align: left;
+    color: #555;
+    padding: 6px 0;
+}
+
+.fare-box td {
+    text-align: right;
+    font-weight: 500;
+}
+
+.fare-total {
+    margin-top: 10px;
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Inline form validation error */
+small.error {
+    color: #d32f2f;          /* strong red */
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 4px;
+    display: block;
+}
+
+/* USER MENU */
+.nav-user {
+    position: relative;
+    display: inline-block;
+}
+
+/* clickable name */
+.nav-user-toggle {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* dropdown box */
+.nav-dropdown {
+    position: absolute;
+    right: 0;
+    top: 120%;
+    background: #ffffff;
+    min-width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: none;
+    overflow: hidden;
+    z-index: 999;
+}
+
+/* links inside dropdown */
+.nav-dropdown a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.nav-dropdown a:hover {
+    background: #f1f3f5;
+}
+
+/* SHOW ON HOVER (DESKTOP) */
+.nav-user:hover .nav-dropdown {
+    display: block;
+}
+
+.nav-user.open .nav-dropdown {
+    display: block;
+}
+
+
+
+
+
+
 

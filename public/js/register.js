@@ -1,189 +1,171 @@
-// ================= UTIL =================
-const setError = (id, message) => {
-  document.getElementById(id).textContent = message;
-};
-
-const clearError = id => {
-  document.getElementById(id).textContent = "";
-};
-
 // ================= NAME =================
-const validateName = () => {
-  let ok = true;
+const nameValidation = () => {
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
 
-  const first = document.getElementById("firstName").value.trim();
-  const last  = document.getElementById("lastName").value.trim();
+  document.getElementById("firstNameError").textContent =
+    firstName === "" ? "First name is required" : "";
 
-  if (!first) {
-    setError("firstNameError", "First name is required");
-    ok = false;
-  } else clearError("firstNameError");
+  document.getElementById("lastNameError").textContent =
+    lastName === "" ? "Last name is required" : "";
 
-  if (!last) {
-    setError("lastNameError", "Last name is required");
-    ok = false;
-  } else clearError("lastNameError");
-
-  return ok;
+  return firstName !== "" && lastName !== "";
 };
 
 // ================= EMAIL =================
-const validateEmail = () => {
+const emailValidation = () => {
   const email = document.getElementById("email").value.trim();
-  const regex = /^\S+@\S+\.\S+$/;
+  const error = document.getElementById("emailError");
 
-  if (!email) {
-    setError("emailError", "Email is required");
+  if (email === "") {
+    error.textContent = "Email is required";
     return false;
   }
 
-  if (!regex.test(email)) {
-    setError("emailError", "Invalid email format");
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    error.textContent = "Invalid email format";
     return false;
   }
 
-  clearError("emailError");
+  error.textContent = "";
   return true;
 };
 
 // ================= PHONE =================
-const validatePhone = () => {
+const phoneValidation = () => {
   const phone = document.getElementById("phone").value.trim();
+  const error = document.getElementById("phoneError");
 
   if (!/^[0-9]{11}$/.test(phone)) {
-    setError("phoneError", "Phone must be 11 digits");
+    error.textContent = "Phone must be 11 digits";
     return false;
   }
 
-  clearError("phoneError");
+  error.textContent = "";
   return true;
 };
 
 // ================= DOB =================
-const validateDOB = () => {
+const dobValidation = () => {
   const dob = document.getElementById("dob").value;
-
-  if (!dob) {
-    setError("dobError", "Date of birth is required");
-    return false;
-  }
-
-  clearError("dobError");
-  return true;
+  document.getElementById("dobError").textContent =
+    dob === "" ? "Date of birth is required" : "";
+  return dob !== "";
 };
 
 // ================= GENDER =================
-const validateGender = () => {
+const genderValidation = () => {
   const genders = document.getElementsByName("gender");
+  const error = document.getElementById("genderError");
 
   for (let g of genders) {
     if (g.checked) {
-      clearError("genderError");
+      error.textContent = "";
       return true;
     }
   }
 
-  setError("genderError", "Select gender");
+  error.textContent = "Select gender";
   return false;
 };
 
 // ================= NID =================
-const validateNID = () => {
+const nidValidation = () => {
   const nid = document.getElementById("nidNumber").value.trim();
+  const error = document.getElementById("nidNumberError");
 
   if (!/^[0-9]{10}$/.test(nid)) {
-    setError("nidNumberError", "NID must be 10 digits");
+    error.textContent = "NID must be 10 digits";
     return false;
   }
 
-  clearError("nidNumberError");
+  error.textContent = "";
   return true;
 };
 
 // ================= PASSWORD =================
-const validatePassword = () => {
-  const pass = document.getElementById("password").value;
+const passwordValidation = () => {
+  const pass = document.getElementById("password").value.trim();
+  const error = document.getElementById("passwordError");
 
   if (pass.length < 6) {
-    setError("passwordError", "Minimum 6 characters");
+    error.textContent = "Minimum 6 characters";
     return false;
   }
 
-  clearError("passwordError");
+  error.textContent = "";
   return true;
 };
 
-const validateConfirmPassword = () => {
-  const pass  = document.getElementById("password").value;
+const confirmPasswordValidation = () => {
+  const pass = document.getElementById("password").value;
   const cpass = document.getElementById("confirmPassword").value;
+  const error = document.getElementById("confirmPasswordError");
 
   if (pass !== cpass) {
-    setError("confirmPasswordError", "Passwords do not match");
+    error.textContent = "Passwords do not match";
     return false;
   }
 
-  clearError("confirmPasswordError");
+  error.textContent = "";
   return true;
 };
 
 // ================= PHOTO =================
-const validatePhoto = () => {
+const profilePhotoValidation = () => {
   const file = document.getElementById("profile-photo").files[0];
-  const allowed = ["image/jpeg", "image/png", "image/jpg"];
+  const error = document.getElementById("profilePhotoError");
 
   if (!file) {
-    setError("profilePhotoError", "Profile photo required");
+    error.textContent = "Profile photo required";
     return false;
   }
 
+  const allowed = ["image/jpeg", "image/png", "image/jpg"];
   if (!allowed.includes(file.type)) {
-    setError("profilePhotoError", "Only JPG or PNG allowed");
+    error.textContent = "Only JPG or PNG allowed";
     return false;
   }
 
-  clearError("profilePhotoError");
+  error.textContent = "";
   return true;
 };
 
 // ================= TERMS =================
-const validateTerms = () => {
+const termsValidation = () => {
   const terms = document.getElementById("terms");
+  const error = document.getElementById("termsError");
 
   if (!terms.checked) {
-    setError("termsError", "You must accept terms");
+    error.textContent = "You must accept terms";
     return false;
   }
 
-  clearError("termsError");
+  error.textContent = "";
   return true;
 };
 
 // ================= FINAL =================
-const validateForm = () => {
+const registrationValidation = () => {
   return (
-    validateName() &&
-    validateEmail() &&
-    validatePhone() &&
-    validateDOB() &&
-    validateGender() &&
-    validateNID() &&
-    validatePassword() &&
-    validateConfirmPassword() &&
-    validatePhoto() &&
-    validateTerms()
+    nameValidation() &&
+    emailValidation() &&
+    phoneValidation() &&
+    dobValidation() &&
+    genderValidation() &&
+    nidValidation() &&
+    passwordValidation() &&
+    confirmPasswordValidation() &&
+    profilePhotoValidation() &&
+    termsValidation()
   );
 };
 
-// ================= SUBMIT =================
-document.getElementById("registrationForm").addEventListener("submit", e => {
-  if (!validateForm()) {
+document
+  .getElementById("registrationForm")
+  .addEventListener("submit", function (e) {
     e.preventDefault();
-  }
-});
-
-// ================= LIVE CLEAR =================
-document.querySelectorAll("input, select").forEach(el => {
-  el.addEventListener("input", () => {
-    document.querySelectorAll(".error").forEach(err => err.textContent = "");
+    if (registrationValidation()) {
+      this.submit();
+    }
   });
-});
