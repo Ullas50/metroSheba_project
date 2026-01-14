@@ -17,10 +17,12 @@ session_start();
 <div class="login-page">
 
     <!-- LEFT IMAGE -->
-    <div class="login-image">
+<div class="login-image">
+    <div class="image-overlay">
         <h1>MetroSheba</h1>
         <p>Fast & Secure Metro Ticket Booking</p>
     </div>
+</div>
 
     <!-- RIGHT FORM -->
     <div class="login-form-container">

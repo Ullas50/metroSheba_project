@@ -284,4 +284,42 @@ body {
     flex: 1;
     display: flex;
 }
+@media (max-width: 900px) {
+    .login-image {
+        display: none;
+    }
+
+    .login-form-container {
+        width: 100%;
+    }
+}
+.login-image {
+    width: 50%;
+    background: 
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+        url("../images/login.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    .image-overlay {
+    color: #fff;
+    padding: 40px;
+}
+
+.image-overlay h1 {
+    font-size: 42px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.image-overlay p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+}
 
