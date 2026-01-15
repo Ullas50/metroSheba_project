@@ -1,0 +1,47 @@
+<?php
+session_start();
+require_once '../model/User.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../view/login.php");
+    exit;
+}
+
+$user = fetchUserById($_SESSION['user_id']);
+if (!$user) {
+    $_SESSION['profile_error'] = "User not found";
+    header("Location: ../view/update_profile.php");
+    exit;
+}
+
+$altMobile = trim($_POST['alt_mobile'] ?? '');
+
+/* VALIDATE ALT MOBILE */
+if ($altMobile !== '' && $altMobile === $user['mobile']) {
+    $_SESSION['profile_error'] = "Alternative number cannot be same as primary number";
+    header("Location: ../view/update_profile.php");
+    exit;
+}
+
+/* HANDLE PHOTO UPLOAD */
+$photoName = $user['photo'];
+
+if (!empty($_FILES['photo']['name'])) {
+    $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+    $photoName = uniqid('profile_') . '.' . $ext;
+    move_uploaded_file(
+        $_FILES['photo']['tmp_name'],
+        "../public/uploads/" . $photoName
+    );
+}
+
+/* UPDATE QUERY */
+$conn = getConnection();
+$stmt = $conn->prepare(
+    "UPDATE users SET photo=?, alt_mobile=? WHERE id=?"
+);
+$stmt->bind_param("ssi", $photoName, $altMobile, $_SESSION['user_id']);
+$stmt->execute();
+
+header("Location: ../view/profile.php");
+exit;
