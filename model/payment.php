@@ -96,4 +96,35 @@ class Payment
         $stmt->bind_param("i", $bookingId);
         return $stmt->execute();
     }
+
+ public function getPurchaseHistory($userId)
+{
+    $stmt = $this->conn->prepare("
+        SELECT 
+            b.id AS booking_id,
+            b.journey_date,
+            b.ticket_quantity,
+            b.confirmed_at,
+            s1.station_name AS from_station,
+            s2.station_name AS to_station,
+            p.paid_amount,
+            p.payment_method
+        FROM bookings b
+        INNER JOIN payments p 
+            ON p.booking_id = b.id
+           AND p.payment_status = 'success'
+        JOIN stations s1 ON b.from_station_id = s1.id
+        JOIN stations s2 ON b.to_station_id = s2.id
+        WHERE b.user_id = ?
+          AND b.booking_status = 'confirmed'
+        ORDER BY b.confirmed_at DESC
+    ");
+
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
+
+
+}
+

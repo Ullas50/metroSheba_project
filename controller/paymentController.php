@@ -2,34 +2,43 @@
 session_start();
 require_once '../model/Payment.php';
 
-if (!isset($_SESSION['user_id'], $_SESSION['pending_booking_id'])) {
+/* HARD GUARD */
+if (
+    !isset($_SESSION['user_id']) ||
+    !isset($_SESSION['pending_booking_id'])
+) {
     header("Location: ../view/passenger_dashboard.php");
     exit;
 }
 
 $payment = new Payment();
 
-$userId    = $_SESSION['user_id'];
-$bookingId = $_SESSION['pending_booking_id'];
+$userId    = (int) $_SESSION['user_id'];
+$bookingId = (int) $_SESSION['pending_booking_id'];
 
+/* FETCH DATA */
 $user    = $payment->getPassenger($userId);
 $booking = $payment->getBookingDetails($bookingId, $userId);
 
-if (!$booking) {
-    header("Location: ../view/passenger_dashboard.php");
+/* STRONG VALIDATION */
+if (!$user || !$booking || !isset($booking['total_price'])) {
+    // temporary debug – REMOVE after fixing
+    echo "<pre>";
+    var_dump($user, $booking);
     exit;
 }
 
-$ticket = (int)$booking['total_price'];
-$vat    = round($ticket * 0.15);
-$service= 20;
-$total  = $ticket + $vat + $service;
+/* PRICE CALCULATION */
+$ticket  = (int) $booking['total_price'];
+$vat     = (int) round($ticket * 0.15);
+$service = 20;
+$total   = $ticket + $vat + $service;
 
 /* STORE FOR VIEW */
 $_SESSION['payment_data'] = [
-    'user' => $user,
+    'user'    => $user,
     'booking' => $booking,
-    'fare' => [
+    'fare'    => [
         'ticket'  => $ticket,
         'vat'     => $vat,
         'service' => $service,
@@ -37,6 +46,6 @@ $_SESSION['payment_data'] = [
     ]
 ];
 
-/* REDIRECT TO VIEW */
+/* REDIRECT */
 header("Location: ../view/payment_page.php");
 exit;

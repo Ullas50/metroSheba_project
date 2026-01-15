@@ -1,0 +1,44 @@
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f6fb;
+}
+
+.history-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.history-container h2 {
+    margin-bottom: 20px;
+    color: #1e88e5;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+}
+
+.history-table th {
+    background: #f5f8ff;
+    font-weight: 600;
+}
+
+.history-table tr:hover {
+    background: #f9fbff;
+}
+
+.empty {
+    color: #777;
+    font-size: 16px;
+}
