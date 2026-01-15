@@ -1,17 +1,26 @@
 <?php
 require_once __DIR__ . '/../core/db.php';
 
-class Payment
-{
+class Payment {
     private $conn;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->conn = getConnection();
     }
 
-    public function getPassenger($userId)
-    {
+    public function createPayment($bookingId, $method, $amount) {
+        $txn = uniqid("TXN_");
+
+        $stmt = $this->conn->prepare(
+            "INSERT INTO payments
+             (booking_id, payment_method, transaction_id, paid_amount)
+             VALUES (?, ?, ?, ?)"
+        );
+        $stmt->bind_param("issi", $bookingId, $method, $txn, $amount);
+        return $stmt->execute();
+    }
+
+    public function getPassenger($userId) {
         $stmt = $this->conn->prepare(
             "SELECT full_name, email, mobile FROM users WHERE id=?"
         );
@@ -20,15 +29,11 @@ class Payment
         return $stmt->get_result()->fetch_assoc();
     }
 
-    public function getBookingDetails($bookingId, $userId)
-    {
+    public function getBookingDetails($bookingId, $userId) {
         $stmt = $this->conn->prepare("
-            SELECT 
-                b.ticket_quantity,
-                b.total_price,
-                b.journey_date,
-                s1.station_name AS from_station,
-                s2.station_name AS to_station
+            SELECT b.*, 
+                   s1.station_name AS from_station,
+                   s2.station_name AS to_station
             FROM bookings b
             JOIN stations s1 ON b.from_station_id = s1.id
             JOIN stations s2 ON b.to_station_id = s2.id
