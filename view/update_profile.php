@@ -95,12 +95,7 @@ unset($_SESSION['profile_error']);
         <a href="profile.php" class="btn-cancel">Cancel</a>
     </div>
 
-    <!-- UPDATE PASSWORD BUTTON -->
-    <div class="password-action">
-        <a href="update_password.php" class="btn-password">
-            Update Password
-        </a>
-    </div>
+   
 
 </form>
 

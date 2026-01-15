@@ -74,8 +74,8 @@ session_start();
 </form>
         <form class="links-form">
 
-            <p class="links">
-                <a href="#">Forgot Password?</a><br>
+           <p class="links">
+    <a href="forgot_password.php">Forgot Password?</a><br>
                 Not registered yet? <a href="register.php">Create Account</a>
             </p>
         </form>

@@ -73,7 +73,11 @@
             <label for="journey_date">Choose Journey Date</label>
         </div>
 
-        <button class="search-btn">Search Trains</button>
+        <button class="search-btn" onclick="window.location.href='login.php'">
+    Search Trains
+</button>
+
+
     </div>
 
     <div class="image-box">

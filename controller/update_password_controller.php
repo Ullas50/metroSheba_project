@@ -12,52 +12,51 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-/* FETCH USER */
 $user = fetchUserById($_SESSION['user_id']);
 if (!$user) {
-    $_SESSION['password_error'] = "User not found";
+    $_SESSION['errors']['general'] = "User not found";
     header("Location: ../view/update_password.php");
     exit;
 }
 
-/* INPUT */
-$current = $_POST['current_password'] ?? '';
-$new     = $_POST['new_password'] ?? '';
-$confirm = $_POST['confirm_password'] ?? '';
+$current = trim($_POST['current_password'] ?? '');
+$new     = trim($_POST['new_password'] ?? '');
+$confirm = trim($_POST['confirm_password'] ?? '');
 
-/* VALIDATION */
-if ($current === '' || $new === '' || $confirm === '') {
-    $_SESSION['password_error'] = "All fields are required";
-    header("Location: ../view/update_password.php");
-    exit;
+$errors = [];
+
+/* FIELD VALIDATION */
+if ($current === '') {
+    $errors['current_password'] = "Current password is required";
+} elseif (!password_verify($current, $user['password'])) {
+    $errors['current_password'] = "Current password is incorrect";
 }
 
-if (!password_verify($current, $user['password'])) {
-    $_SESSION['password_error'] = "Current password is incorrect";
-    header("Location: ../view/update_password.php");
-    exit;
+if ($new === '') {
+    $errors['new_password'] = "New password is required";
+} elseif (strlen($new) < 6) {
+    $errors['new_password'] = "Minimum 6 characters required";
+} elseif (password_verify($new, $user['password'])) {
+    $errors['new_password'] = "New password must be different";
 }
 
-if (strlen($new) < 6) {
-    $_SESSION['password_error'] = "New password must be at least 6 characters";
-    header("Location: ../view/update_password.php");
-    exit;
+if ($confirm === '') {
+    $errors['confirm_password'] = "Please re-enter the password";
+} elseif ($new !== $confirm) {
+    $errors['confirm_password'] = "Passwords do not match";
 }
 
-if ($new !== $confirm) {
-    $_SESSION['password_error'] = "New passwords do not match";
+/* IF ERRORS → BACK */
+if (!empty($errors)) {
+    $_SESSION['errors'] = $errors;
     header("Location: ../view/update_password.php");
     exit;
 }
 
 /* UPDATE PASSWORD */
-if (!updatePassword($_SESSION['user_id'], $new)) {
-    $_SESSION['password_error'] = "Password update failed";
-    header("Location: ../view/update_password.php");
-    exit;
-}
+updatePassword($_SESSION['user_id'], $new);
 
-/* FORCE LOGOUT */
+/* LOGOUT */
 session_unset();
 session_destroy();
 

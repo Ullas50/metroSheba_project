@@ -1,63 +1,59 @@
 <?php
 session_start();
-require_once '../model/User.php';
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit;
-}
-
-$error = $_SESSION['password_error'] ?? '';
-unset($_SESSION['password_error']);
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MetroSheba | Update Password</title>
+    <title>Update Password</title>
     <link rel="stylesheet" href="../public/css/update_password.css">
+    <link rel="stylesheet" href="../public/css/home.css">
 </head>
 <body>
 
-<?php include 'partials/header.php'; ?>
-
 <div class="password-container">
 
-    <form class="password-card"
-          method="POST"
-          action="../controller/update_password_controller.php">
+<form class="password-card"
+      method="POST"
+      action="../controller/update_password_controller.php">
 
-        <h2>Update Password</h2>
+    <h2>Update Password</h2>
 
-        <?php if ($error): ?>
-            <div class="alert error"><?= htmlspecialchars($error) ?></div>
+    <!-- CURRENT PASSWORD -->
+    <div class="form-group <?= isset($errors['current_password']) ? 'error' : '' ?>">
+        <label>Current Password</label>
+        <input type="password" name="current_password">
+        <?php if (isset($errors['current_password'])): ?>
+            <small class="error-text"><?= $errors['current_password'] ?></small>
         <?php endif; ?>
+    </div>
 
-        <!-- OLD PASSWORD -->
-        <div class="form-group">
-            <label>Current Password</label>
-            <input type="password" name="current_password" required>
-        </div>
+    <!-- NEW PASSWORD -->
+    <div class="form-group <?= isset($errors['new_password']) ? 'error' : '' ?>">
+        <label>New Password</label>
+        <input type="password" name="new_password">
+        <?php if (isset($errors['new_password'])): ?>
+            <small class="error-text"><?= $errors['new_password'] ?></small>
+        <?php endif; ?>
+    </div>
 
-        <!-- NEW PASSWORD -->
-        <div class="form-group">
-            <label>New Password</label>
-            <input type="password" name="new_password" required>
-        </div>
+    <!-- CONFIRM PASSWORD -->
+    <div class="form-group <?= isset($errors['confirm_password']) ? 'error' : '' ?>">
+        <label>Re-enter New Password</label>
+        <input type="password" name="confirm_password">
+        <?php if (isset($errors['confirm_password'])): ?>
+            <small class="error-text"><?= $errors['confirm_password'] ?></small>
+        <?php endif; ?>
+    </div>
 
-        <!-- CONFIRM PASSWORD -->
-        <div class="form-group">
-            <label>Re-enter New Password</label>
-            <input type="password" name="confirm_password" required>
-        </div>
+    <div class="form-actions">
+        <button type="submit" class="btn-confirm">Confirm</button>
+        <a href="profile.php" class="btn-cancel">Back</a>
+    </div>
 
-        <!-- ACTIONS -->
-        <div class="form-actions">
-            <button type="submit" class="btn-confirm">Confirm</button>
-            <a href="update_profile.php" class="btn-cancel">Back</a>
-        </div>
-
-    </form>
+</form>
 
 </div>
 
