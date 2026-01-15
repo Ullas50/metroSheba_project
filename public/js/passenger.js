@@ -3,7 +3,6 @@ const from = document.getElementById("from");
 const to = document.getElementById("to");
 const dateInput = document.getElementById("journey_date");
 const totalPrice = document.getElementById("totalPrice");
-
 const qtyInput = document.getElementById("quantity");
 
 // Errors
@@ -33,35 +32,25 @@ function calculatePrice() {
         return;
     }
 
-    const f = from.selectedOptions[0].dataset.order;
-    const t = to.selectedOptions[0].dataset.order;
-    const qty = parseInt(qtyInput.value) || 1;
+    const f = parseInt(from.selectedOptions[0].dataset.order);
+    const t = parseInt(to.selectedOptions[0].dataset.order);
+    const qty = parseInt(qtyInput.value) || 0;
 
     totalPrice.textContent = "৳" + Math.abs(f - t) * 10 * qty;
 }
 
-[from, to, qtyInput].forEach(el => el.addEventListener("change", calculatePrice));
+[from, to, qtyInput].forEach(el =>
+    el.addEventListener("change", calculatePrice)
+);
 
-// ================= QUANTITY VALIDATION =================
+// ================= QUANTITY CONTROL =================
 
-// prevent mouse wheel change
+// Disable mouse wheel changing number
 qtyInput.addEventListener("wheel", e => e.preventDefault());
 
-// live validation
+// Live calculation ONLY (no forcing, no limit)
 qtyInput.addEventListener("input", () => {
     qtyError.textContent = "";
-
-    let val = parseInt(qtyInput.value);
-
-    if (isNaN(val) || val < 1) {
-        qtyInput.value = 1;
-    }
-
-    if (val > 10) {
-        qtyInput.value = 10;
-        qtyError.textContent = "Maximum 10 tickets allowed";
-    }
-
     calculatePrice();
 });
 
@@ -110,11 +99,6 @@ document.getElementById("bookingForm").addEventListener("submit", async e => {
         hasError = true;
     }
 
-    if (qty > 10) {
-        qtyError.textContent = "Maximum 10 tickets allowed";
-        hasError = true;
-    }
-
     if (hasError) return;
 
     const formData = new FormData(e.target);
@@ -131,7 +115,4 @@ document.getElementById("bookingForm").addEventListener("submit", async e => {
     }
 
     window.location.href = "../controller/PaymentController.php";
-;
-;
-;
 });

@@ -109,10 +109,16 @@ session_start();
 
             <!-- TERMS -->
             <div class="terms">
-                <input type="checkbox" id="terms" name="terms">
-                I agree to the Terms & Conditions
-                <small id="termsError" class="error"></small>
-            </div>
+    <label class="terms-label">
+        <input type="checkbox" id="terms" name="terms">
+        <span>
+            I agree to the
+            <a href="terms.php" target="_blank">Terms &amp; Conditions</a>
+        </span>
+    </label>
+    <small id="termsError" class="error"></small>
+</div>
+
 
             <button type="submit">Register</button>
 

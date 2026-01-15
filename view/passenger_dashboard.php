@@ -13,14 +13,13 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>MetroSheba | Book Ticket</title>
 
-    <!-- YOUR MAIN DESIGN CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="../public/css/passenger.css">
     <link rel="stylesheet" href="../public/css/home.css">
 </head>
@@ -35,7 +34,7 @@ if (!isset($_SESSION['user_id'])) {
         <h2><span class="blue-text">Metro Ticket</span></h2>
         <p>Confirm your metro ticket</p>
 
-        <form id="bookingForm" valiadate>
+        <form id="bookingForm" novalidate>
 
             <div class="field">
                 <label>From</label>
@@ -57,7 +56,14 @@ if (!isset($_SESSION['user_id'])) {
 
             <div class="field">
                 <label>Quantity</label>
-                <input type="number" id="quantity" name="quantity" value="1" >
+                <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    value="0"
+                    min="0"
+                    step="1"
+                    inputmode="numeric">
                 <small class="error" id="qtyError"></small>
             </div>
 
@@ -95,16 +101,15 @@ document.addEventListener("click", e => {
     }
 });
 </script>
+
 <script>
 /* Force back-button users to login */
 window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
         window.location.href = "login.php";
-
     }
 });
 </script>
-
 
 </body>
 </html>

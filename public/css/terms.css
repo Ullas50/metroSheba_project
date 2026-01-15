@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f4f6fb;
+    padding: 40px;
+}
+
+.terms-container {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+h1 {
+    text-align: center;
+    color: #0d47a1;
+    margin-bottom: 10px;
+}
+
+.updated {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+section {
+    margin-bottom: 24px;
+}
+
+section h2 {
+    font-size: 18px;
+    color: #1e88e5;
+    margin-bottom: 8px;
+}
+
+section p {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Close button */
+.back-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 26px;
+    background: #1e88e5;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background: #1565c0;
+}
