@@ -130,7 +130,8 @@ document.getElementById("bookingForm").addEventListener("submit", async e => {
         return;
     }
 
-    window.location.href = "payment_page.php";
+    window.location.href = "../controller/PaymentController.php";
+;
 ;
 ;
 });

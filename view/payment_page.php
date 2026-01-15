@@ -1,52 +1,29 @@
 <?php
 session_start();
-require_once '../core/db.php';
 
-if (!isset($_SESSION['user_id'], $_SESSION['pending_booking_id'])) {
+/* Guard */
+if (
+    !isset(
+        $_SESSION['payment_data']['user'],
+        $_SESSION['payment_data']['booking'],
+        $_SESSION['payment_data']['fare']
+    )
+) {
     header("Location: passenger_dashboard.php");
     exit;
 }
 
-$conn = getConnection();
+$data = $_SESSION['payment_data'];
 
-$userId    = $_SESSION['user_id'];
-$bookingId = $_SESSION['pending_booking_id'];
-
-/* Passenger info */
-$userStmt = $conn->prepare(
-    "SELECT full_name, email, mobile FROM users WHERE id=?"
-);
-$userStmt->bind_param("i", $userId);
-$userStmt->execute();
-$user = $userStmt->get_result()->fetch_assoc();
-
-/* Booking + journey info */
-$bookingStmt = $conn->prepare("
-    SELECT 
-        b.ticket_quantity,
-        b.total_price,
-        b.journey_date,
-        s1.station_name AS from_station,
-        s2.station_name AS to_station
-    FROM bookings b
-    JOIN stations s1 ON b.from_station_id = s1.id
-    JOIN stations s2 ON b.to_station_id = s2.id
-    WHERE b.id=? AND b.user_id=?
-");
-$bookingStmt->bind_param("ii", $bookingId, $userId);
-$bookingStmt->execute();
-$booking = $bookingStmt->get_result()->fetch_assoc();
-
-$ticketPrice   = $booking['total_price'];
-$vat           = round($ticketPrice * 0.15);
-$serviceCharge = 20;
-$grandTotal    = $ticketPrice + $vat + $serviceCharge;
+$user    = $data['user'];
+$booking = $data['booking'];
+$fare    = $data['fare'];
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Payment</title>
+    <title>MetroSheba | Payment</title>
     <link rel="stylesheet" href="../public/css/home.css">
     <link rel="stylesheet" href="../public/css/payment.css">
 </head>
@@ -58,7 +35,6 @@ $grandTotal    = $ticketPrice + $vat + $serviceCharge;
 
     <!-- LEFT -->
     <div class="left">
-
         <div class="card">
             <h3>Passenger Details</h3>
             <p><strong>Name:</strong> <?= htmlspecialchars($user['full_name']) ?></p>
@@ -76,16 +52,14 @@ $grandTotal    = $ticketPrice + $vat + $serviceCharge;
                 <button data-method="upay">Upay</button>
             </div>
 
-            <button id="payBtn" disabled class="pay-btn">
+            <button id="proceedBtn" class="pay-btn" disabled>
                 Proceed to Payment
             </button>
         </div>
-
     </div>
 
     <!-- RIGHT -->
     <div class="right">
-
         <div class="card">
             <h3>Journey Details</h3>
             <p><?= $booking['from_station'] ?> → <?= $booking['to_station'] ?></p>
@@ -95,26 +69,22 @@ $grandTotal    = $ticketPrice + $vat + $serviceCharge;
 
         <div class="card">
             <h3>Fare Details</h3>
-
-            <div class="row"><span>Ticket Price</span><span><?= $ticketPrice ?></span></div>
-            <div class="row"><span>VAT</span><span><?= $vat ?></span></div>
-            <div class="row"><span>Service Charge</span><span><?= $serviceCharge ?></span></div>
-
+            <div class="row"><span>Ticket Price</span><span><?= $fare['ticket'] ?></span></div>
+            <div class="row"><span>VAT</span><span><?= $fare['vat'] ?></span></div>
+            <div class="row"><span>Service Charge</span><span><?= $fare['service'] ?></span></div>
             <hr>
-
             <div class="row total">
                 <span>Total</span>
-                <span>৳<?= $grandTotal ?></span>
+                <span>৳<?= $fare['total'] ?></span>
             </div>
-
-        
+            <p class="note">Service charge is non-refundable.</p>
         </div>
-
     </div>
 
 </div>
 
 <?php include 'partials/footer.php'; ?>
+
 <script src="../public/js/payment.js"></script>
 </body>
 </html>

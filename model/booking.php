@@ -45,4 +45,42 @@ class Booking {
         mysqli_stmt_execute($stmt);
         return mysqli_insert_id($this->conn);
     }
+
+    public function savePaymentMethod($bookingId, $method) {
+    $stmt = $this->conn->prepare(
+        "UPDATE bookings 
+         SET payment_method = ? 
+         WHERE id = ? AND booking_status = 'pending'"
+    );
+
+    $stmt->bind_param("si", $method, $bookingId);
+    return $stmt->execute();
+
+    
 }
+
+public function getPendingBooking($bookingId) {
+    $stmt = $this->conn->prepare(
+        "SELECT id, total_price, payment_method 
+         FROM bookings 
+         WHERE id=? AND booking_status='pending'"
+    );
+    $stmt->bind_param("i", $bookingId);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_assoc();
+}
+
+public function savePayment($bookingId, $account, $amount) {
+    $stmt = $this->conn->prepare(
+        "UPDATE bookings 
+         SET payment_account=?, paid_amount=?, booking_status='paid'
+         WHERE id=?"
+    );
+    $stmt->bind_param("sii", $account, $amount, $bookingId);
+    return $stmt->execute();
+}
+
+}
+
+
+
