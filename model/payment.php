@@ -27,23 +27,51 @@ class Payment
                 b.ticket_quantity,
                 b.total_price,
                 b.journey_date,
+                b.journey_time,
                 s1.station_name AS from_station,
                 s2.station_name AS to_station
             FROM bookings b
             JOIN stations s1 ON b.from_station_id = s1.id
             JOIN stations s2 ON b.to_station_id = s2.id
-            WHERE b.id=? AND b.user_id=?
+            WHERE b.id = ?
+              AND b.user_id = ?
         ");
+
         $stmt->bind_param("ii", $bookingId, $userId);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
 
-    public function createPayment(
-        int $bookingId,
-        string $method,
-        int $amount
-    ) {
+    public function getTicketByBooking($bookingId, $userId)
+    {
+        $stmt = $this->conn->prepare("
+            SELECT 
+                b.id AS booking_id,
+                b.ticket_quantity,
+                b.journey_date,
+                b.journey_time,
+                b.confirmed_at,
+                s1.station_name AS from_station,
+                s2.station_name AS to_station,
+                u.full_name,
+                u.email,
+                u.mobile
+            FROM bookings b
+            JOIN stations s1 ON b.from_station_id = s1.id
+            JOIN stations s2 ON b.to_station_id = s2.id
+            JOIN users u ON b.user_id = u.id
+            WHERE b.id = ?
+              AND b.user_id = ?
+              AND b.booking_status = 'confirmed'
+        ");
+
+        $stmt->bind_param("ii", $bookingId, $userId);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    public function createPayment(int $bookingId, string $method, int $amount)
+    {
         $transactionId = uniqid('TXN_', true);
 
         $stmt = $this->conn->prepare(
@@ -52,14 +80,7 @@ class Payment
              VALUES (?, ?, ?, ?, 'success')"
         );
 
-        $stmt->bind_param(
-            "issi",
-            $bookingId,
-            $method,
-            $transactionId,
-            $amount
-        );
-
+        $stmt->bind_param("issi", $bookingId, $method, $transactionId, $amount);
         return $stmt->execute();
     }
 

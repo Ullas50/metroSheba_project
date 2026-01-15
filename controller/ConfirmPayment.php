@@ -41,13 +41,7 @@ $method    = $_SESSION['payment']['method'];
 $amount    = $_SESSION['payment']['amount'];
 
 /* INSERT PAYMENT */
-$paid = $payment->createPayment(
-    $bookingId,
-    $method,
-    $amount
-);
-
-if (!$paid) {
+if (!$payment->createPayment($bookingId, $method, $amount)) {
     $_SESSION['payment_error'] = "Payment record failed";
     header("Location: ../view/payment_form.php");
     exit;
@@ -56,11 +50,12 @@ if (!$paid) {
 /* CONFIRM BOOKING */
 $payment->confirmBooking($bookingId);
 
-/* CLEANUP */
-unset($_SESSION['payment']);
-unset($_SESSION['pending_booking_id']);
-unset($_SESSION['payment_error']);
+/* SAVE FOR TICKET PAGE */
+$_SESSION['last_booking_id'] = $bookingId;
 
-/* DONE */
-header("Location: ../view/passenger_dashboard.php");
+/* CLEANUP */
+unset($_SESSION['payment'], $_SESSION['pending_booking_id'], $_SESSION['payment_error']);
+
+/* REDIRECT TO TICKET */
+header("Location: ../view/ticket.php");
 exit;
