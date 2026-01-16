@@ -34,5 +34,9 @@ $bookingId = $booking->createBooking(
 );
 
 $_SESSION['pending_booking_id'] = $bookingId;
+$_SESSION['booking'] = [
+    'total_price' => $total
+];
+
 
 echo "OK";
