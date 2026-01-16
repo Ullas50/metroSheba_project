@@ -1,0 +1,255 @@
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* =========================
+   PAGE BACKGROUND
+========================= */
+body {
+    background: #f5f8fc;
+    color: #1f2937;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+
+    opacity: 0;
+    animation: pageEnter 0.45s ease-out forwards;
+}
+
+/* =========================
+   CARDS
+========================= */
+.card,
+.summary {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 36px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
+
+    opacity: 0;
+    animation: cardEnter 0.45s ease-out forwards;
+}
+
+.card { animation-delay: 0.12s; }
+.summary { animation-delay: 0.18s; }
+
+/* =========================
+   TITLES (MATCH IMAGE 2)
+========================= */
+.card h3,
+.summary h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1e88e5; /* primary blue */
+    margin-bottom: 6px;
+
+    opacity: 0;
+    animation: textFade 0.35s ease forwards;
+    animation-delay: 0.28s;
+}
+
+.subtitle {
+    font-size: 15px;
+    color: #6b7280;
+    font-weight: 400;
+    margin-bottom: 28px;
+
+    opacity: 0;
+    animation: textFade 0.35s ease forwards;
+    animation-delay: 0.35s;
+}
+
+/* =========================
+   FORM
+========================= */
+.field {
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    font-size: 15px;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    font-size: 15px;
+    color: #0f172a;
+    background: #ffffff;
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+input:focus,
+select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+/* =========================
+   SUMMARY
+========================= */
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    font-size: 15px;
+
+    opacity: 0;
+    animation: rowEnter 0.3s ease forwards;
+}
+
+.summary-row span {
+    color: #6b7280;
+}
+
+.summary-row strong {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.summary-row:nth-child(2) { animation-delay: 0.35s; }
+.summary-row:nth-child(3) { animation-delay: 0.40s; }
+.summary-row:nth-child(4) { animation-delay: 0.45s; }
+.summary-row:nth-child(5) { animation-delay: 0.50s; }
+
+.divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 22px 0;
+}
+
+/* =========================
+   TOTAL
+========================= */
+.summary-total {
+    font-size: 34px;
+    font-weight: 700;
+    color: #1f2937;
+    text-align: right;
+    margin-bottom: 6px;
+
+    transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.summary-total.updated {
+    transform: scale(1.04);
+    color: #2563eb;
+}
+
+.summary-note {
+    font-size: 14px;
+    color: #6b7280;
+    text-align: right;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.pay-btn {
+    width: 100%;
+    margin-top: 32px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 14px;
+    background: #228be6;
+    color: #ffffff;
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.1s ease;
+}
+
+.pay-btn:hover {
+    background: #1c7ed6;
+    box-shadow: 0 10px 28px rgba(34,139,230,0.35);
+}
+
+.pay-btn:active {
+    transform: translateY(1px);
+}
+
+/* =========================
+   ERROR
+========================= */
+.error {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #dc2626;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes rowEnter {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
