@@ -127,3 +127,17 @@ function deleteUser($id) {
     $sql = "DELETE FROM users WHERE id=$id";
     return mysqli_query($conn, $sql);
 }
+
+
+/* =========================
+   CHECK EMAIL EXISTS
+========================= */
+function emailExists($email) {
+    $conn = getConnection();
+    $email = mysqli_real_escape_string($conn, $email);
+
+    $sql = "SELECT id FROM users WHERE email='$email' LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+
+    return ($result && mysqli_num_rows($result) > 0);
+}
