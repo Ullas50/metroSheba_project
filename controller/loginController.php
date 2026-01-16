@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user['role'] === 'admin') {
         header("Location: ../view/adminDashboard.php");
     } elseif ($user['role'] === 'seller') {
-        header("Location: ../view/sellerDashboard.php");
+        header("Location: ../view/seller_dashboard.php");
     } else {
         header("Location: ../view/passenger_dashboard.php");
     }
