@@ -524,7 +524,11 @@ button,
 ================================ */
 @media print {
     button,
-    .back-btn {
+    .back-btn,
+    .header,
+    .actions,
+    .print-btn, 
+    .search-input {
         display: none !important;
     }
 }
