@@ -48,7 +48,7 @@ if (!$data) {
         <div><strong>Total Price:</strong> ৳<?= number_format($data['total_price']) ?></div>
     </div>
 
-    <a href="admin_dashboard.php" class="back-btn">← Back to Dashboard</a>
+    <a href="admin_dashboard.php" class="back-btn">Back to Dashboard</a>
 
 </div>
 

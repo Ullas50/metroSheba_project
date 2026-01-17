@@ -64,9 +64,7 @@ function deleteBooking(id) {
     .then(res => res.text())
     .then(res => {
         if (res === "OK") {
-            const row = document.getElementById("p" + id);
-            if (row) row.remove();
-            refreshRevenue();
+            window.location.reload(); // ✅ FORCE FULL REFRESH
         } else {
             alert("Delete failed");
         }
@@ -91,9 +89,7 @@ function deleteSellerSale(id) {
     .then(res => res.text())
     .then(res => {
         if (res === "OK") {
-            const row = document.getElementById("s" + id);
-            if (row) row.remove();
-            refreshRevenue();
+            window.location.reload(); // ✅ FORCE FULL REFRESH
         } else {
             alert("Delete failed");
         }
