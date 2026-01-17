@@ -34,18 +34,6 @@ session_start();
                 <p>Quickly register to book your metro train tickets</p>
             </div>
 
-            <!-- ERROR BOX -->
-            <?php
-            if (!empty($_SESSION['errors'])) {
-                echo '<div class="error-box">';
-                foreach ($_SESSION['errors'] as $err) {
-                    echo '<p>' . htmlspecialchars($err) . '</p>';
-                }
-                echo '</div>';
-                unset($_SESSION['errors']);
-            }
-            ?>
-
             <form id="registrationForm"
                 method="POST"
                 action="../controller/registerController.php"
@@ -55,40 +43,46 @@ session_start();
                 <div class="row">
                     <div>
                         <label>First Name</label>
-                        <input type="text" id="firstName" name="firstName">
-                        <small id="firstNameError" class="error"></small>
+                        <input type="text" id="firstName" name="firstName"
+                            value="<?= htmlspecialchars($_SESSION['old']['firstName'] ?? '') ?>">
+                        <small id="firstNameError" class="error">
+                            <?= htmlspecialchars($_SESSION['errors']['firstName'] ?? '') ?>
+                        </small>
                     </div>
+
                     <div>
                         <label>Last Name</label>
-                        <input type="text" id="lastName" name="lastName">
-                        <small id="lastNameError" class="error"></small>
+                        <input type="text" id="lastName" name="lastName"
+                            value="<?= htmlspecialchars($_SESSION['old']['lastName'] ?? '') ?>">
+                        <small id="lastNameError" class="error">
+                            <?= htmlspecialchars($_SESSION['errors']['lastName'] ?? '') ?>
+                        </small>
                     </div>
                 </div>
 
+
+
                 <!-- EMAIL -->
                 <label>Email</label>
-                <input
-                    type="text"
-                    id="email"
-                    name="email"
+                <input type="text" id="email" name="email"
                     value="<?= htmlspecialchars($_SESSION['old']['email'] ?? '') ?>">
-
                 <small id="emailError" class="error">
                     <?= htmlspecialchars($_SESSION['errors']['email'] ?? '') ?>
                 </small>
 
-
-
-
                 <!-- PHONE -->
                 <label>Mobile Number</label>
                 <input type="text" id="phone" name="phone">
-                <small id="phoneError" class="error"></small>
+                <small id="phoneError" class="error">
+                    <?= htmlspecialchars($_SESSION['errors']['phone'] ?? '') ?>
+                </small>
 
                 <!-- DOB -->
                 <label>Date of Birth</label>
                 <input type="date" id="dob" name="dob">
-                <small id="dobError" class="error"></small>
+                <small id="dobError" class="error">
+                    <?= htmlspecialchars($_SESSION['errors']['dob'] ?? '') ?>
+                </small>
 
                 <!-- GENDER -->
                 <label>Gender</label>
@@ -97,27 +91,35 @@ session_start();
                     <label><input type="radio" name="gender" value="female"> Female</label>
                     <label><input type="radio" name="gender" value="other"> Other</label>
                 </div>
-                <small id="genderError" class="error"></small>
+                <small id="genderError" class="error">
+                    <?= htmlspecialchars($_SESSION['errors']['gender'] ?? '') ?>
+                </small>
 
                 <!-- NID -->
                 <label>NID Number</label>
                 <input type="text" id="nidNumber" name="nidNumber">
-                <small id="nidNumberError" class="error"></small>
+                <small id="nidNumberError" class="error">
+                    <?= htmlspecialchars($_SESSION['errors']['nid'] ?? '') ?>
+                </small>
 
                 <!-- PASSWORD -->
                 <label>Password</label>
                 <input type="password" id="password" name="password">
-                <small id="passwordError" class="error"></small>
+                <small id="passwordError" class="error">
+                    <?= htmlspecialchars($_SESSION['errors']['password'] ?? '') ?>
+                </small>
 
                 <!-- CONFIRM -->
                 <label>Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword">
                 <small id="confirmPasswordError" class="error"></small>
 
-                <!-- PHOTO -->
+                <!-- PHOTO (FIXED ID) -->
                 <label>Profile Photo</label>
-                <input type="file" id="profile-photo" name="profile-photo">
-                <small id="profilePhotoError" class="error"></small>
+                <input type="file" id="profilePhoto" name="profile-photo">
+                <small id="profilePhotoError" class="error">
+                    <?= htmlspecialchars($_SESSION['errors']['photo'] ?? '') ?>
+                </small>
 
                 <!-- TERMS -->
                 <div class="terms">
@@ -128,7 +130,10 @@ session_start();
                             <a href="terms.php" target="_blank">Terms &amp; Conditions</a>
                         </span>
                     </label>
-                    <small id="termsError" class="error"></small>
+
+                    <small id="termsError" class="error">
+                        <?= htmlspecialchars($_SESSION['errors']['terms'] ?? '') ?>
+                    </small>
                 </div>
 
 
@@ -144,9 +149,8 @@ session_start();
 
     <script src="../public/js/register.js"></script>
     <?php include 'partials/footer.php'; ?>
-    <?php
-    unset($_SESSION['errors'], $_SESSION['old']);
-    ?>
+
+    <?php unset($_SESSION['errors'], $_SESSION['old']); ?>
 
 </body>
 
