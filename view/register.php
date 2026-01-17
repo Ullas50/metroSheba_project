@@ -67,15 +67,15 @@ session_start();
 
                 <!-- EMAIL -->
                 <label>Email</label>
-<input
-    type="text"
-    id="email"
-    name="email"
-    value="<?= htmlspecialchars($_SESSION['old']['email'] ?? '') ?>">
+                <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    value="<?= htmlspecialchars($_SESSION['old']['email'] ?? '') ?>">
 
-<small id="emailError" class="error">
-    <?= htmlspecialchars($_SESSION['errors']['email'] ?? '') ?>
-</small>
+                <small id="emailError" class="error">
+                    <?= htmlspecialchars($_SESSION['errors']['email'] ?? '') ?>
+                </small>
 
 
 
