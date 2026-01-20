@@ -2,31 +2,34 @@
 session_start();
 require_once '../core/db.php';
 
-/* AUTH */
+// authorization check
 if (
     !isset($_SESSION['user_id']) ||
     $_SESSION['role'] !== 'seller' ||
     !isset($_SESSION['seller_payment'])
 ) {
     exit('Unauthorized');
+    
 }
-
+// seller and payment data from session
 $sellerId = (int) $_SESSION['user_id'];
 $data     = $_SESSION['seller_payment'];
+//amount entered by seller and expected amount from session
 $received = (int) ($_POST['received_amount'] ?? 0);
 $amount   = (int) $data['amount'];
 
-/* EXACT MATCH REQUIRED */
+// ensure exact cash amount
 if ($received !== $amount) {
+    //cash payment must match the total exactly
     $_SESSION['cash_error'] = 'Received amount must be exactly ৳' . $amount;
     header("Location: ../view/seller_cash_payment.php");
     exit;
 }
 
 
-$conn = getConnection();
+$conn = getConnection();// connection database
 
-/* INSERT SALE */
+//insert seller sale record
 $stmt = $conn->prepare(
     "INSERT INTO seller_sales
      (seller_id, from_station_id, to_station_id, ticket_quantity,
@@ -34,7 +37,7 @@ $stmt = $conn->prepare(
      VALUES (?, ?, ?, ?, ?, ?, ?)"
 );
 
-$stmt->bind_param(
+$stmt->bind_param( // query details
     "iiiisii",
     $sellerId,
     $data['from_id'],
@@ -46,9 +49,8 @@ $stmt->bind_param(
 );
 
 $stmt->execute();
-$saleId = $conn->insert_id;
+$saleId = $conn->insert_id; //get the newly created sale ID
 
-/* PREPARE TICKET */
 $_SESSION['seller_ticket_id'] = $saleId;
 unset($_SESSION['seller_payment']);
 

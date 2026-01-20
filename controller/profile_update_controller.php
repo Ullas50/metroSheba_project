@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../view/login.php");
     exit;
 }
-
+// load the current user using the session ID
 $user = fetchUserById($_SESSION['user_id']);
 if (!$user) {
     $_SESSION['profile_error'] = "User not found";
@@ -16,7 +16,7 @@ if (!$user) {
 
 $altMobile = trim($_POST['alt_mobile'] ?? '');
 
-/* VALIDATE ALT MOBILE */
+// validate mobile number
 if ($altMobile !== '') {
 
     // 11-digit check
@@ -34,7 +34,7 @@ if ($altMobile !== '') {
     }
 }
 
-/* HANDLE PHOTO UPLOAD */
+//handle photo upload
 $photoName = $user['photo'];
 
 if (!empty($_FILES['photo']['name'])) {
@@ -46,7 +46,7 @@ if (!empty($_FILES['photo']['name'])) {
     );
 }
 
-/* UPDATE QUERY */
+// update seller profile in database
 $conn = getConnection();
 $stmt = $conn->prepare(
     "UPDATE users SET photo=?, alt_mobile=? WHERE id=?"

@@ -8,18 +8,18 @@ if (!isset($_SESSION['booking'])) {
     exit;
 }
 
-$method = $_POST['method'] ?? '';
-
+$method = $_POST['method'] ?? ''; //read payment method sent from the form
+//payment method is required
 if ($method === '') {
     http_response_code(400);
     echo "Invalid payment method";
     exit;
 }
 
-/* Amount MUST come from booking session, not JS */
+// amount must come from booking session, not JS
 $amount = $_SESSION['booking']['total_price'];
 
-/* SINGLE SOURCE OF TRUTH */
+
 $_SESSION['payment'] = [
     'method' => $method,
     'amount' => $amount

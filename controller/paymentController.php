@@ -2,39 +2,43 @@
 session_start();
 require_once '../model/Payment.php';
 
-/* HARD GUARD */
+//make sure required session data exists
 if (
     !isset($_SESSION['user_id']) ||
     !isset($_SESSION['pending_booking_id'])
 ) {
     header("Location: ../view/passenger_dashboard.php");
+
     exit;
 }
 
 $payment = new Payment();
+// if user ID or booking ID is missing
 
 $userId    = (int) $_SESSION['user_id'];
-$bookingId = (int) $_SESSION['pending_booking_id'];
+$bookingId = (int) $_SESSION['pending_booking_id']; 
 
-/* FETCH DATA */
-$user    = $payment->getPassenger($userId);
-$booking = $payment->getBookingDetails($bookingId, $userId);
 
-/* STRONG VALIDATION */
+$user    = $payment->getPassenger($userId); 
+$booking = $payment->getBookingDetails($bookingId, $userId); 
+
+
+//strong validation
+//shows data if something is missing 
 if (!$user || !$booking || !isset($booking['total_price'])) {
-    // temporary debug – REMOVE after fixing
+    
     echo "<pre>";
     var_dump($user, $booking);
     exit;
 }
 
-/* PRICE CALCULATION */
+// price calculation
 $ticket  = (int) $booking['total_price'];
 $vat     = (int) round($ticket * 0.15);
 $service = 20;
 $total   = $ticket + $vat + $service;
 
-/* STORE FOR VIEW */
+// store data in session for payment page
 $_SESSION['payment_data'] = [
     'user'    => $user,
     'booking' => $booking,
@@ -46,6 +50,6 @@ $_SESSION['payment_data'] = [
     ]
 ];
 
-/* REDIRECT */
+
 header("Location: ../view/payment_page.php");
 exit;

@@ -2,11 +2,11 @@
 session_start();
 require_once '../model/User.php';
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) { 
     header("Location: ../view/login.php");
     exit;
 }
-
+// mwthod guard
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: ../view/update_password.php");
     exit;
@@ -25,7 +25,8 @@ $confirm = trim($_POST['confirm_password'] ?? '');
 
 $errors = [];
 
-/* FIELD VALIDATION */
+// VALIDATION
+//current password check
 if ($current === '') {
     $errors['current_password'] = "Current password is required";
 } elseif (!password_verify($current, $user['password'])) {
@@ -40,23 +41,22 @@ if ($new === '') {
     $errors['new_password'] = "New password must be different";
 }
 
-if ($confirm === '') {
+if ($confirm === '') { 
     $errors['confirm_password'] = "Please re-enter the password";
 } elseif ($new !== $confirm) {
     $errors['confirm_password'] = "Passwords do not match";
 }
 
-/* IF ERRORS → BACK */
+//error handle
 if (!empty($errors)) {
     $_SESSION['errors'] = $errors;
     header("Location: ../view/update_password.php");
     exit;
 }
-
-/* UPDATE PASSWORD */
+//update password
 updatePassword($_SESSION['user_id'], $new);
 
-/* LOGOUT */
+// User must log in again after password change
 session_unset();
 session_destroy();
 
