@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 // load the current user using the session ID
 $user = fetchUserById($_SESSION['user_id']);
 if (!$user) {
-    $_SESSION['profile_error'] = "User not found"; //stop if the user record cannot be found
+    $_SESSION['profile_error'] = "User not found";
     header("Location: ../view/update_profile.php");
     exit;
 }

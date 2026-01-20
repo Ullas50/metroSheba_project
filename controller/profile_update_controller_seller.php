@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 $user = fetchUserById($_SESSION['user_id']); // seller data using the logged-in user ID
 
 if (!$user) {
-    $_SESSION['profile_error'] = "User not found"; //if user record is not found, stop and show error
+    $_SESSION['profile_error'] = "User not found";
     header("Location: ../view/update_seller_profile.php");
     exit;
 }
@@ -20,7 +20,7 @@ $altMobile = trim($_POST['alt_mobile'] ?? '');
 // validate alternative mobile number
 if ($altMobile !== '') {
 
-    // 11-digit check
+  
     if (strlen($altMobile) !== 11) {
         $_SESSION['errors']['alt_mobile'] = "Alternative number must be exactly 11 digits";
         header("Location: ../view/update_admin_profile.php");

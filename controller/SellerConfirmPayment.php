@@ -8,7 +8,7 @@ if (
     $_SESSION['role'] !== 'seller' ||
     !isset($_SESSION['seller_payment'])
 ) {
-    exit('Unauthorized');//stop immediately if seller is not authorized
+    exit('Unauthorized');
     
 }
 // seller and payment data from session

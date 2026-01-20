@@ -7,7 +7,7 @@ if (
     !isset($_SESSION['user_id']) ||
     !isset($_SESSION['pending_booking_id'])
 ) {
-    header("Location: ../view/passenger_dashboard.php");//if user ID or booking ID is missing, redirect to dashboard
+    header("Location: ../view/passenger_dashboard.php");
 
     exit;
 }
@@ -19,13 +19,14 @@ $userId    = (int) $_SESSION['user_id'];
 $bookingId = (int) $_SESSION['pending_booking_id']; 
 
 
-$user    = $payment->getPassenger($userId); //get passenger info
-$booking = $payment->getBookingDetails($bookingId, $userId); //get booking details
+$user    = $payment->getPassenger($userId); 
+$booking = $payment->getBookingDetails($bookingId, $userId); 
 
 
 //strong validation
+//shows data if something is missing 
 if (!$user || !$booking || !isset($booking['total_price'])) {
-    //shows data if something is missing 
+    
     echo "<pre>";
     var_dump($user, $booking);
     exit;

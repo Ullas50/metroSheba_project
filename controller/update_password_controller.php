@@ -2,7 +2,7 @@
 session_start();
 require_once '../model/User.php';
 
-if (!isset($_SESSION['user_id'])) { // authorization check
+if (!isset($_SESSION['user_id'])) { 
     header("Location: ../view/login.php");
     exit;
 }
@@ -33,7 +33,7 @@ if ($current === '') {
     $errors['current_password'] = "Current password is incorrect";
 }
 
-if ($new === '') {  // new password rules
+if ($new === '') {
     $errors['new_password'] = "New password is required";
 } elseif (strlen($new) < 6) {
     $errors['new_password'] = "Minimum 6 characters required";
@@ -41,7 +41,7 @@ if ($new === '') {  // new password rules
     $errors['new_password'] = "New password must be different";
 }
 
-if ($confirm === '') { //confirm password match
+if ($confirm === '') { 
     $errors['confirm_password'] = "Please re-enter the password";
 } elseif ($new !== $confirm) {
     $errors['confirm_password'] = "Passwords do not match";

@@ -10,8 +10,8 @@ if (
     isset($_POST['ajax']) &&
     $_POST['ajax'] === 'check_email'
 ) {
-    $email = trim($_POST['email'] ?? ''); //clean the email input
-// If email exists, return error response
+    $email = trim($_POST['email'] ?? ''); 
+
     if ($email !== '' && emailExists($email)) {
         echo json_encode([
             'status'  => 'error',
@@ -31,7 +31,7 @@ if (
     isset($_POST['ajax']) &&
     $_POST['ajax'] === 'validate_field'
 ) {
-    $field = $_POST['field'] ?? '';  // identify which field is being validated
+    $field = $_POST['field'] ?? ''; 
     $value = trim($_POST['value'] ?? '');
 
     $error = '';
@@ -95,7 +95,7 @@ if (
             break;
     }
 
-    if ($error !== '') { // return validation 
+    if ($error !== '') { 
         echo json_encode([
             'status'  => 'error',
             'message' => $error
@@ -169,7 +169,7 @@ if (!isset($_POST['terms'])) {
     $errors['terms'] = "You must accept the Terms & Conditions";
 }
 
-//photo
+
 if (!isset($_FILES['profile-photo']) || $_FILES['profile-photo']['error'] !== 0) {
     $errors['photo'] = "Profile photo is required";
 }
@@ -194,8 +194,8 @@ if (emailExists($_POST['email'])) {
 $ext = pathinfo($_FILES['profile-photo']['name'], PATHINFO_EXTENSION);
 $photoName = time() . "_" . uniqid() . "." . $ext;
 $uploadDir = "../public/uploads/";
-
-if (!is_dir($uploadDir)) { //create upload directory if it doesn’t exist
+//create upload directory if it doesn’t exist
+if (!is_dir($uploadDir)) { 
     mkdir($uploadDir, 0777, true);
 }
 
