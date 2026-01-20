@@ -1,17 +1,10 @@
-/* ======================================================
-   ADMIN DASHBOARD JS
-   - Passenger Search (fixed)
-   - Seller Search (fixed)
-   - Delete Passenger (AJAX)
-   - Delete Seller (AJAX)
-   - Refresh Revenue (AJAX)
-====================================================== */
+// ADMIN DASHBOARD JS
+    //Search, delete actions and revenue refresh handled here 
+  
 
 
-/* =========================
-   PASSENGER SEARCH
-   (NO TABLE ID REQUIRED)
-========================= */
+
+  // PASSENGER SEARCH (NO TABLE ID REQUIRED)
 const searchInput = document.getElementById("searchInput");
 
 if (searchInput) {
@@ -28,10 +21,7 @@ if (searchInput) {
 }
 
 
-/* =========================
-   SELLER SEARCH
-   (NO TABLE ID REQUIRED)
-========================= */
+//Seller search feature Works same as passenger search
 const sellerSearch = document.getElementById("sellerSearch");
 
 if (sellerSearch) {
@@ -48,9 +38,9 @@ if (sellerSearch) {
 }
 
 
-/* =========================
-   DELETE PASSENGER (AJAX)
-========================= */
+
+  // Delete a passenger booking
+   //Uses AJAX to avoid page submit
 function deleteBooking(id) {
     if (!confirm("Delete this passenger booking?")) return;
 
@@ -64,7 +54,7 @@ function deleteBooking(id) {
     .then(res => res.text())
     .then(res => {
         if (res === "OK") {
-            window.location.reload(); // ✅ FORCE FULL REFRESH
+            window.location.reload(); 
         } else {
             alert("Delete failed");
         }
@@ -73,9 +63,8 @@ function deleteBooking(id) {
 }
 
 
-/* =========================
-   DELETE SELLER SALE (AJAX)
-========================= */
+//DELETE SELLER SALE 
+
 function deleteSellerSale(id) {
     if (!confirm("Delete this seller sale?")) return;
 
@@ -89,7 +78,7 @@ function deleteSellerSale(id) {
     .then(res => res.text())
     .then(res => {
         if (res === "OK") {
-            window.location.reload(); // ✅ FORCE FULL REFRESH
+            window.location.reload(); 
         } else {
             alert("Delete failed");
         }
@@ -98,9 +87,7 @@ function deleteSellerSale(id) {
 }
 
 
-/* =========================
-   REFRESH REVENUE TABLE
-========================= */
+//REFRESH REVENUE TABLE
 function refreshRevenue() {
     fetch("../controller/AdminController.php?refresh=1")
         .then(res => res.json())
