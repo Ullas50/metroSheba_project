@@ -1,5 +1,7 @@
 <?php
 session_start();
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
 require_once '../model/User.php';
 
 if (!isset($_SESSION['user_id'])) {
@@ -74,6 +76,9 @@ unset($_SESSION['profile_error']);
                value="<?= htmlspecialchars($user['alt_mobile'] ?? '') ?>"
                placeholder="Optional">
         <small class="hint">Must be different from primary number</small>
+        <small class="error">
+                    <?= htmlspecialchars($errors['alt_mobile'] ?? '') ?>
+                </small>
     </div>
 
     <!-- GENDER & DOB (LOCKED) -->

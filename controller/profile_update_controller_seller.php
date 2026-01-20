@@ -17,10 +17,21 @@ if (!$user) {
 $altMobile = trim($_POST['alt_mobile'] ?? '');
 
 /* VALIDATE ALT MOBILE */
-if ($altMobile !== '' && $altMobile === $user['mobile']) {
-    $_SESSION['profile_error'] = "Alternative number cannot be same as primary number";
-    header("Location: ../view/update_seller_profile.php");
-    exit;
+if ($altMobile !== '') {
+
+    // 11-digit check
+    if (strlen($altMobile) !== 11) {
+        $_SESSION['errors']['alt_mobile'] = "Alternative number must be exactly 11 digits";
+        header("Location: ../view/update_admin_profile.php");
+        exit;
+    }
+
+    // Same as primary check
+    if ($altMobile === $user['mobile']) {
+        $_SESSION['errors']['alt_mobile'] = "Alternative number cannot be same as primary number";
+        header("Location: ../view/update_admin_profile.php");
+        exit;
+    }
 }
 
 /* HANDLE PHOTO UPLOAD */

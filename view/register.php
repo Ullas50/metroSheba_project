@@ -112,7 +112,9 @@ session_start();
                 <!-- CONFIRM -->
                 <label>Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword">
-                <small id="confirmPasswordError" class="error"></small>
+                <small id="confirmPasswordError" class="error">
+                    <?= htmlspecialchars($_SESSION['errors']['confirmPassword'] ?? '') ?>
+                </small>
 
                 <!-- PHOTO (FIXED ID) -->
                 <label>Profile Photo</label>

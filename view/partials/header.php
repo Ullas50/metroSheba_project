@@ -5,7 +5,6 @@
         </div>
 
         <nav>
-            <a href="admin.php" class="nav-link">Admin</a>
             <a href="home.php" class="nav-link">Home</a>
             <a href="login.php" class="nav-link">Login</a>
             <a href="register.php" class="nav-link">Register</a>
