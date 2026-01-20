@@ -9,9 +9,9 @@ $result = mysqli_query( // all stations, ordered by their sequence
 );
 
 $stations = [];
-
+ //add each station to the array
 while ($row = mysqli_fetch_assoc($result)) {
-    $stations[] = $row;  //add each station to the array
+    $stations[] = $row;  
 }
 
 header("Content-Type: application/json");//return the station data as JSON
