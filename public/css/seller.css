@@ -1,6 +1,3 @@
-/* =========================
-   RESET
-========================= */
 * {
     margin: 0;
     padding: 0;
@@ -8,17 +5,13 @@
     font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* =========================
-   PAGE BACKGROUND
-========================= */
+/* PAGE BACKGROUND */
 body {
     background: #f5f8fc;
     color: #1f2937;
 }
 
-/* =========================
-   LAYOUT
-========================= */
+/* LAYOUT */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -31,9 +24,7 @@ body {
     animation: pageEnter 0.45s ease-out forwards;
 }
 
-/* =========================
-   CARDS
-========================= */
+/* CARDS*/
 .card,
 .summary {
     background: #ffffff;
@@ -48,9 +39,7 @@ body {
 .card { animation-delay: 0.12s; }
 .summary { animation-delay: 0.18s; }
 
-/* =========================
-   TITLES (MATCH IMAGE 2)
-========================= */
+/* TITLES */
 .card h3,
 .summary h3 {
     font-size: 24px;
@@ -74,9 +63,7 @@ body {
     animation-delay: 0.35s;
 }
 
-/* =========================
-   FORM
-========================= */
+/* FORM */
 .field {
     margin-bottom: 22px;
 }
@@ -114,9 +101,7 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
 }
 
-/* =========================
-   SUMMARY
-========================= */
+/* SUMMARY */
 .summary-row {
     display: flex;
     justify-content: space-between;
@@ -147,9 +132,7 @@ select:focus {
     margin: 22px 0;
 }
 
-/* =========================
-   TOTAL
-========================= */
+/* TOTAL*/
 .summary-total {
     font-size: 34px;
     font-weight: 700;
@@ -171,9 +154,7 @@ select:focus {
     text-align: right;
 }
 
-/* =========================
-   BUTTON
-========================= */
+/* BUTTON */
 .pay-btn {
     width: 100%;
     margin-top: 32px;
@@ -201,18 +182,14 @@ select:focus {
     transform: translateY(1px);
 }
 
-/* =========================
-   ERROR
-========================= */
+/* ERROR */
 .error {
     margin-top: 12px;
     font-size: 14px;
     color: #dc2626;
 }
 
-/* =========================
-   ANIMATIONS
-========================= */
+/* ANIMATIONS */
 @keyframes pageEnter {
     from {
         opacity: 0;

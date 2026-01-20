@@ -1,5 +1,3 @@
-
-/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +9,7 @@ body {
     background: #f4f6f9;
 }
 
-/* ================= HEADER ================= */
+/*  HEADER */
 .header {
     background: linear-gradient(90deg, #1f3a5f, #2b5aa0);
     padding: 18px 0;
@@ -55,7 +53,7 @@ nav .nav-link:hover::after {
     width: 100%;
 }
 
-/* ================= LAYOUT ================= */
+/* LAYOUT */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -81,7 +79,7 @@ nav .nav-link:hover::after {
     }
 }
 
-/* ================= FORM CARD ================= */
+/*FORM CARD */
 .form-card {
     width: 45%;
     background: #fff;
@@ -121,7 +119,7 @@ nav .nav-link:hover::after {
     margin-bottom: 25px;
 }
 
-/* ================= FIELDS ================= */
+/* FIELDS */
 .field {
     margin-top: 16px;
 }
@@ -152,7 +150,7 @@ nav .nav-link:hover::after {
     outline: none;
 }
 
-/* ================= DATE FLOAT LABEL ================= */
+/*  DATE FLOAT LABEL  */
 .date-field {
     position: relative;
 }
@@ -177,14 +175,14 @@ nav .nav-link:hover::after {
     color: #1e88e5;
 }
 
-/* ================= TOTAL ================= */
+/* TOTAL  */
 #totalPrice {
     color: #0b5ed7;
     font-size: 18px;
     font-weight: bold;
 }
 
-/* ================= BUTTON ================= */
+/* BUTTON */
 .search-btn {
     margin-top: 30px;
     width: 100%;
@@ -223,7 +221,7 @@ nav .nav-link:hover::after {
     opacity: 1;
 }
 
-/* ================= IMAGE ================= */
+/* IMAGE  */
 .image-box {
     width: 55%;
     border-radius: 26px;
@@ -258,7 +256,7 @@ nav .nav-link:hover::after {
     }
 }
 
-/* ================= ERROR ================= */
+/* ERROR  */
 small.error {
     color: #d32f2f;
     font-size: 13px;
@@ -291,7 +289,7 @@ small.error {
         width: 100%;
     }
 }
-/* ================= NAV USER DROPDOWN ================= */
+/* NAV USER DROPDOWN  */
 
 .nav-user {
     position: relative;

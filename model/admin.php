@@ -133,7 +133,7 @@ class Admin {
     }
 
  // Get full passenger booking details
-    public function getPassengerDetails($bookingId) {
+    public function getPassengerDetails($bookingId) { 
     $stmt = $this->conn->prepare(" 
         SELECT
             u.full_name,

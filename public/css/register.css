@@ -1,6 +1,5 @@
-/* =========================
-   RESET & BASE
-========================= */
+/* 
+   RESET & BASE */
 * {
     margin: 0;
     padding: 0;
@@ -13,9 +12,7 @@ body {
     color: #333;
 }
 
-/* =========================
-   PAGE LAYOUT
-========================= */
+/* PAGE LAYOUT */
 .register-page {
     display: flex;
     min-height: 100vh;
@@ -54,9 +51,7 @@ body {
     font-size: 16px;
 }
 
-/* =========================
-   FORM CONTAINER
-========================= */
+/* FORM CONTAINER */
 .register-container {
     width: 50%;
     background: #fff;
@@ -80,9 +75,7 @@ body {
     color: #666;
 }
 
-/* =========================
-   FORM ELEMENTS
-========================= */
+/* FORM ELEMENTS */
 form > div {
     margin-bottom: 16px;
 }
@@ -136,9 +129,7 @@ input:focus {
     text-decoration: none;
 }
 
-/* =========================
-   ERROR STYLES (FIXED)
-========================= */
+/* ERROR STYLES  */
 .error {
     color: #d93025;
     font-size: 13px;
@@ -162,9 +153,7 @@ input.input-error {
     font-weight: 500;
 }
 
-/* =========================
-   BUTTON
-========================= */
+/* BUTTON */
 button {
     width: 100%;
     padding: 12px;
@@ -194,9 +183,7 @@ button:hover {
     text-decoration: none;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 @media (max-width: 900px) {
     .register-page {
         flex-direction: column;
@@ -222,9 +209,7 @@ button:hover {
     }
 }
 
-/* =========================
-   PAGE LOAD ANIMATION
-========================= */
+/* PAGE LOAD ANIMATION */
 @keyframes fadeSlideIn {
     from {
         opacity: 0;
@@ -240,9 +225,7 @@ button:hover {
     animation: fadeSlideIn 0.8s ease forwards;
 }
 
-/* =========================
-   IMAGE OVERLAY TEXT ANIMATION
-========================= */
+/* IMAGE OVERLAY TEXT ANIMATION */
 .image-overlay h1 {
     opacity: 0;
     transform: translateY(20px);
@@ -263,9 +246,7 @@ button:hover {
     }
 }
 
-/* =========================
-   FORM FIELD INTERACTION
-========================= */
+/* FORM FIELD INTERACTION */
 input,
 button {
     transition: all 0.25s ease;
@@ -276,9 +257,7 @@ input:focus {
     box-shadow: 0 0 0 3px rgba(30,136,229,0.15);
 }
 
-/* =========================
-   BUTTON MICRO-INTERACTION
-========================= */
+/* BUTTON MICRO-INTERACTION */
 button {
     position: relative;
     overflow: hidden;
@@ -294,9 +273,7 @@ button:active {
     box-shadow: 0 3px 8px rgba(30,136,229,0.3);
 }
 
-/* =========================
-   ERROR SHAKE (SUBTLE)
-========================= */
+/* ERROR SHAKE*/
 @keyframes shake {
     0% { transform: translateX(0); }
     25% { transform: translateX(-4px); }
@@ -313,16 +290,12 @@ input.input-error {
     animation: shake 0.3s ease;
 }
 
-/* =========================
-   ERROR BOX ENTRANCE
-========================= */
+/* ERROR BOX ENTRANCE */
 .error-box {
     animation: fadeSlideIn 0.4s ease;
 }
 
-/* =========================
-   LINK HOVER POLISH
-========================= */
+/* LINK HOVER POLISH */
 .login-link a {
     position: relative;
 }
