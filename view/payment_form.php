@@ -34,7 +34,7 @@ unset($_SESSION['payment_error']);
             <div class="input-group">
                 <label>Mobile Number</label>
                 <input
-                    type="text"
+                    type="number"
                     name="mobile"
                     placeholder="01XXXXXXXXX"
                     class="<?= $error ? 'input-error' : '' ?>"

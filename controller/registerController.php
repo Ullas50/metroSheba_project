@@ -141,7 +141,7 @@ if (empty($_POST['password'])) {
 /* PHONE */
 if (empty($_POST['phone'])) {
     $errors['phone'] = "Mobile number is required";
-} elseif (strlen(trim($_POST['phone'])) !== 11) {
+} elseif (!preg_match('/^01[3-9][0-9]{8}$/', trim($_POST['phone']))) {
     $errors['phone'] = "Mobile number must be exactly 11 digits";
 }
 
