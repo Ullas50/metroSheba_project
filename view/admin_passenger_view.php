@@ -1,20 +1,24 @@
 <?php
-session_start();
+session_start();//session for admin access 
 require_once '../model/Admin.php';
-
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+//check user id & role from database
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') 
+{
     header("Location: login.php");
     exit;
 }
 
-if (!isset($_GET['id'])) {
+if (!isset($_GET['id'])) 
+{
     exit("Invalid request");
 }
-
+//admin object create
 $admin = new Admin();
+//passenger details get using booking id
 $data = $admin->getPassengerDetails((int)$_GET['id']);
 
-if (!$data) {
+if (!$data) 
+{
     exit("Passenger not found");
 }
 ?>
