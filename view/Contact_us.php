@@ -10,7 +10,7 @@
 
 <?php include 'partials/header1.php'; ?>
 
-<main class="contact-page">
+<main class="contact-page"> 
 
     <div class="container">
         <h1 class="contact-title">Contact Us</h1>
@@ -18,7 +18,7 @@
             For any help regarding tickets, payments, or technical issues
         </p>
 
-        <!-- CONTACT CARDS -->
+        <!--support number for payment service-->
         <div class="contact-cards">
 
             <div class="contact-card">
@@ -48,18 +48,17 @@
 
         </div>
 
-        <!-- EMAIL SECTION -->
         <div class="contact-email">
             <h3>Technical Support</h3>
             <p>
                 Email us at:
-                <strong>nabilahoque@gmai.com</strong>
+                <strong>admin@gmail.com</strong>
             </p>
         </div>
     </div>
 
 </main>
-
+<!-- footer section-->
 <?php include 'partials/footer.php'; ?>
 
 </body>

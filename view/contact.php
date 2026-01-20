@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="../public/css/contact.css">
 </head>
 <body>
-
+<!--common header-->
 <?php include 'partials/header.php'; ?>
 
 <main class="contact-page">
-
+    <!--contact page-->
     <div class="container">
         <h1 class="contact-title">Contact Us</h1>
+        <!--short description for heading-->
         <p class="contact-subtitle">
             For any help regarding tickets, payments, or technical issues
         </p>
-
-        <!-- CONTACT CARDS -->
+         <!--show support num for pay services-->
         <div class="contact-cards">
 
             <div class="contact-card">
@@ -48,7 +48,7 @@
 
         </div>
 
-        <!-- EMAIL SECTION -->
+    
         <div class="contact-email">
             <h3>Technical Support</h3>
             <p>
