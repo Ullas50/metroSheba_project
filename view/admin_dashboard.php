@@ -1,8 +1,9 @@
 <?php
-session_start();
+session_start();//session for loggin user data
 require_once '../model/Admin.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') 
+{
     header("Location: login.php");
     exit;
 }
@@ -27,7 +28,7 @@ $grandTotal = $admin->getGrandTotal();
 <br><br>
     <div class="dashboard-container">
 
-        <!-- ================= TOP RIGHT STATS ================= -->
+        <!-- show status right -->
         <div class="top-stats">
             <div class="stat-card green">
                 <div class="stat-left">
@@ -57,7 +58,7 @@ $grandTotal = $admin->getGrandTotal();
 
         </div>
 
-        <!-- ================= PASSENGERS ================= -->
+        <!--passenger sec-->
         <h2>Passenger Information</h2>
 
         <input
@@ -103,7 +104,7 @@ $grandTotal = $admin->getGrandTotal();
             </tbody>
         </table>
 
-        <!-- ================= SELLERS ================= -->
+        <!--t_seller sec-->
         <h2>Seller Sales</h2>
 
         <input
@@ -148,7 +149,7 @@ $grandTotal = $admin->getGrandTotal();
             </tbody>
         </table>
 
-        <!-- ================= TOTAL REVENUE ================= -->
+        <!--show revenue-->
         <h2>Total Revenue</h2>
 
         <table class="data-table">
