@@ -4,20 +4,20 @@ require_once "../core/db.php"; // Include database connection
 // FETCH USER BY EMAIL (LOGIN)
 function fetchUser($email) {
     $conn = getConnection(); // Get database connection
-    $email = mysqli_real_escape_string($conn, $email); // Sanitize email input
+    $email = mysqli_real_escape_string($conn, $email); 
 
     $sql = "SELECT * FROM users WHERE email='$email' LIMIT 1"; // Prepare SQL query
     $result = mysqli_query($conn, $sql); // Execute query
         // Return user data if found
     if ($result && mysqli_num_rows($result) === 1) {
-        return mysqli_fetch_assoc($result); // Fetch and return user record
+        return mysqli_fetch_assoc($result); 
     }
     return false;
 }
 
 // INSERT NEW USER
-function insertUser($user) { // $user is associative array with user details
-    $conn = getConnection(); // Get database connection
+function insertUser($user) {
+    $conn = getConnection(); 
 
     $full_name = mysqli_real_escape_string($conn, $user['full_name']); 
     $email     = mysqli_real_escape_string($conn, $user['email']);
@@ -33,14 +33,13 @@ function insertUser($user) { // $user is associative array with user details
     if ($check && mysqli_num_rows($check) > 0) {
         return "EMAIL_EXISTS";
     }
-    // Insert new user record
     $sql = "INSERT INTO users
-        (role, full_name, email, password, nid, dob, gender, mobile, photo, created_at) // Insert user fields
+        (role, full_name, email, password, nid, dob, gender, mobile, photo, created_at) 
         VALUES
         ('customer','$full_name','$email','$password','$nid','$dob','$gender','$mobile','$photo',NOW())";
 
-    if (!mysqli_query($conn, $sql)) { // Execute insert query
-        return mysqli_error($conn); // SHOW REAL DB ERROR
+    if (!mysqli_query($conn, $sql)) { 
+        return mysqli_error($conn); 
     }
 
     return true;
@@ -62,7 +61,7 @@ function fetchAllUsers() {
 }
 
 // FETCH USER BY ID
-function fetchUserById($id) { // Fetch user details by ID
+function fetchUserById($id) { 
     $conn = getConnection();
     $id = intval($id); // Sanitize ID input
 
@@ -76,7 +75,7 @@ function fetchUserById($id) { // Fetch user details by ID
 }
 
 // UPDATE USER DETAILS
-function updateUser($user) { // $user is associative array with updated user details
+function updateUser($user) { 
     $conn = getConnection();
 
     $id        = intval($user['id']);

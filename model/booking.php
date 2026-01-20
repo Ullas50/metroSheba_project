@@ -11,7 +11,7 @@ class Booking { // Booking model class
     
     // Get station order number by station ID
     public function getStationOrder($id) {
-        $stmt = mysqli_prepare(          // Prepare SQL query
+        $stmt = mysqli_prepare(        
 
             $this->conn,
             "SELECT station_order FROM stations WHERE id=?"
@@ -29,7 +29,6 @@ class Booking { // Booking model class
     }
        // Create a new booking record
     public function createBooking($userId, $from, $to, $qty, $total, $date) {
-        // Prepare insert query
     $stmt = mysqli_prepare(
             $this->conn,
             "INSERT INTO bookings 
@@ -54,7 +53,7 @@ class Booking { // Booking model class
     }
     // Save selected payment method for pending booking
     public function savePaymentMethod($bookingId, $method) {
-    $stmt = $this->conn->prepare(  // Prepare update query
+    $stmt = $this->conn->prepare(  
         "UPDATE bookings 
          SET payment_method = ? 
          WHERE id = ? AND booking_status = 'pending'" 
@@ -68,7 +67,6 @@ class Booking { // Booking model class
  // Get pending booking details by booking ID
 public function getPendingBooking($bookingId) {
     $stmt = $this->conn->prepare(
-         // Prepare select query
         "SELECT id, total_price, payment_method 
          FROM bookings 
          WHERE id=? AND booking_status='pending'"
@@ -80,7 +78,6 @@ public function getPendingBooking($bookingId) {
 }
      // Save payment details and mark booking as paid
 public function savePayment($bookingId, $account, $amount) {
-// Prepare update query   
 $stmt = $this->conn->prepare(
         "UPDATE bookings 
          SET payment_account=?, paid_amount=?, booking_status='paid' 

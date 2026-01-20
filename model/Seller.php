@@ -11,8 +11,8 @@ class Seller {
     }
     // Get ticket details by sale ID
     public function getTicketBySale($saleId) {
-        $stmt = $this->conn->prepare( // Prepare ticket details query
-            "SELECT // Select relevant ticket and seller fields
+        $stmt = $this->conn->prepare( 
+            "SELECT 
                 ss.id,
                 ss.journey_date,
                 ss.ticket_quantity,

@@ -9,14 +9,14 @@ class SellerSale {
     }
 // Create a new seller sale record
     public function create($seller, $from, $to, $qty, $date, $total, $paid) {
-        $stmt = $this->conn->prepare( // Prepare insert query
-            "INSERT INTO seller_sales // Insert relevant sale fields
+        $stmt = $this->conn->prepare( 
+            "INSERT INTO seller_sales
             (seller_id, from_station_id, to_station_id, ticket_quantity, journey_date, total_price, paid_amount)
             VALUES (?, ?, ?, ?, ?, ?, ?)"
         );
 // Bind sale values to query
         $stmt->bind_param("iiiisii",
-            $seller, $from, $to, $qty, $date, $total, $paid // sale values
+            $seller, $from, $to, $qty, $date, $total, $paid 
         );
 
         return $stmt->execute(); // Execute query

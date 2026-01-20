@@ -14,7 +14,7 @@ class Admin {
 
        // Get all confirmed passenger bookings
     public function getPassengers() {
-    $sql = " // SQL query to fetch passenger booking data
+    $sql = "
         SELECT 
             b.id AS booking_id,
             u.full_name,
@@ -90,7 +90,7 @@ class Admin {
 
     // Get sales grouped by route
     public function getRouteSales() {
-        $sql = " // SQL query combining passenger and seller sales
+        $sql = "
             SELECT
                 s1.station_name AS from_station,
                 s2.station_name AS to_station,
@@ -134,7 +134,7 @@ class Admin {
 
  // Get full passenger booking details
     public function getPassengerDetails($bookingId) {
-    $stmt = $this->conn->prepare("  // Prepare passenger details query
+    $stmt = $this->conn->prepare(" 
         SELECT
             u.full_name,
             u.email,
@@ -167,7 +167,7 @@ class Admin {
 }
  // Get full seller sale details
 public function getSellerSaleDetails($saleId) {
-    $stmt = $this->conn->prepare(" // Prepare seller sale details query
+    $stmt = $this->conn->prepare(" 
         SELECT
             u.full_name,
             u.email,

@@ -23,7 +23,7 @@ class Payment
     }
         // Get full booking passenger details
     public function getBookingDetails($bookingId, $userId)
-    {   // Prepare booking details query
+    { 
         $stmt = $this->conn->prepare("
             SELECT 
                 b.ticket_quantity,
@@ -45,9 +45,9 @@ class Payment
     }
 // Get ticket details by booking ID and user ID
     public function getTicketByBooking($bookingId, $userId)
-    {   // Prepare ticket details query
+    {   
         $stmt = $this->conn->prepare("
-            SELECT // Select relevant ticket and passenger fields
+            SELECT 
                 b.id AS booking_id,
                 b.ticket_quantity,
                 b.journey_date,
@@ -73,7 +73,7 @@ class Payment
     }
     // Create payment record
     public function createPayment(int $bookingId, string $method, int $amount)
-    {// Generate unique transaction ID
+    {
         $transactionId = uniqid('TXN_', true);
 
         $stmt = $this->conn->prepare( // Prepare insert query
@@ -87,10 +87,10 @@ class Payment
     }
 
     public function confirmBooking(int $bookingId)
-    { // Prepare update query
+    { 
         $stmt = $this->conn->prepare(
             "UPDATE bookings
-             SET booking_status = 'confirmed', // Set confirmed status and timestamp
+             SET booking_status = 'confirmed',
                  confirmed_at = NOW()
              WHERE id = ?"
         );
@@ -100,7 +100,7 @@ class Payment
     }
         // Get purchase history for a user
  public function getPurchaseHistory($userId)
-{ // Prepare purchase history query
+{ 
     $stmt = $this->conn->prepare("
         SELECT 
             b.id AS booking_id,
