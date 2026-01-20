@@ -1,3 +1,29 @@
+<<<<<<< HEAD
+=======
+<?php
+session_start();
+//validation err from session
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+require_once '../model/User.php';
+
+if (!isset($_SESSION['user_id'])) 
+{
+    header("Location: login.php");
+    exit;
+}
+//fetch user data by id from db
+$user = fetchUserById($_SESSION['user_id']);
+if (!$user) 
+{
+    echo "User not found";
+    exit;
+}
+//profile specific err msg
+$error = $_SESSION['profile_error'] ?? '';
+unset($_SESSION['profile_error']);
+?>
+>>>>>>> 6e22563efb3462a9108f657d39cedfbad3f406ce
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +35,7 @@
 <body>
 
 <?php include 'partials/header3.php'; ?>
-
+<!--profile update form-->
 <div class="update-container">
 
 <form class="update-card"
@@ -18,12 +44,12 @@
       enctype="multipart/form-data">
 
     <h2>Update Profile</h2>
-
+<!--display general err msg-->
     <?php if ($error): ?>
         <div class="alert error"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
 
-    <!-- PROFILE IMAGE -->
+    <!--profile pic-->
     <div class="image-section">
         <img
             src="../public/uploads/<?= htmlspecialchars($user['photo'] ?: 'default.png') ?>"
@@ -36,19 +62,19 @@
         </label>
     </div>
 
-    <!-- FULL NAME (LOCKED) -->
+    <!--full name-->
     <div class="form-group">
         <label>Full Name</label>
         <input type="text" value="<?= htmlspecialchars($user['full_name']) ?>" readonly>
     </div>
 
-    <!-- PRIMARY MOBILE (LOCKED) -->
+    <!-- primary mob num-->
     <div class="form-group">
         <label>Primary Mobile</label>
         <input type="text" value="<?= htmlspecialchars($user['mobile']) ?>" readonly>
     </div>
 
-    <!-- ALT MOBILE -->
+    <!-- alt mob num-->
     <div class="form-group">
         <label>Alternative Mobile</label>
         <input type="text"
@@ -62,7 +88,7 @@
 
     </div>
 
-    <!-- GENDER & DOB (LOCKED) -->
+    <!--gender & dob-->
     <div class="form-row">
         <div class="form-group">
             <label>Gender</label>
@@ -75,18 +101,13 @@
         </div>
     </div>
 
-    <!-- ACTIONS -->
+    <!--action-->
     <div class="form-actions">
         <button type="submit" class="btn-confirm">Confirm</button>
         <a href="../controller/admin_profile.php" class="btn-cancel">Cancel</a>
     </div>
-
-   
-
 </form>
-
 </div>
-
 <script src="../public/js/profile_preview.js"></script>
 <?php include 'partials/footer.php'; ?>
 </body>

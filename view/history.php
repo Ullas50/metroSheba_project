@@ -1,14 +1,16 @@
 <?php
-session_start();
+session_start();//check lodded in user
 require_once '../model/Payment.php';
 
-/* AUTH GUARD */
-if (!isset($_SESSION['user_id'])) {
+// authrntication check
+if (!isset($_SESSION['user_id'])) 
+{
     header("Location: login.php");
     exit;
 }
-
+//petch purchase history
 $payment = new Payment();
+//get purchase all histroy 
 $history = $payment->getPurchaseHistory($_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
@@ -20,9 +22,9 @@ $history = $payment->getPurchaseHistory($_SESSION['user_id']);
      <link rel="stylesheet" href="../public/css/home.css">
 </head>
 <body>
-
+<!--for common header-->
 <?php include 'partials/header1.php'; ?>
-
+<!--container for parchase history-->
 <div class="history-container">
 
     <h2>Purchase History</h2>
@@ -43,6 +45,7 @@ $history = $payment->getPurchaseHistory($_SESSION['user_id']);
                 </tr>
             </thead>
             <tbody>
+                <!--array for foreach-->
                 <?php foreach ($history as $row): ?>
                     <tr>
                         <td>#<?= $row['booking_id'] ?></td>
@@ -64,7 +67,7 @@ $history = $payment->getPurchaseHistory($_SESSION['user_id']);
 <br>
 <br>
 <br>
-
+<!--common footer-->
 <?php include 'partials/footer.php'; ?>
 </body>
 </html>

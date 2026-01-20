@@ -1,4 +1,23 @@
+<<<<<<< HEAD
 
+=======
+<?php
+session_start();//session for loggin user data
+require_once '../model/Admin.php';
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') 
+{
+    header("Location: login.php");
+    exit;
+}
+
+$admin = new Admin();
+$passengers = $admin->getPassengers();
+$sellers    = $admin->getSellerTickets();
+$routes     = $admin->getRouteSales();
+$grandTotal = $admin->getGrandTotal();
+?>
+>>>>>>> 6e22563efb3462a9108f657d39cedfbad3f406ce
 <!DOCTYPE html>
 <html>
 
@@ -13,7 +32,7 @@
 <br><br>
     <div class="dashboard-container">
 
-        <!-- ================= TOP RIGHT STATS ================= -->
+        <!-- show status right -->
         <div class="top-stats">
             <div class="stat-card green">
                 <div class="stat-left">
@@ -43,7 +62,7 @@
 
         </div>
 
-        <!-- ================= PASSENGERS ================= -->
+        <!--passenger sec-->
         <h2>Passenger Information</h2>
 
         <input
@@ -89,7 +108,7 @@
             </tbody>
         </table>
 
-        <!-- ================= SELLERS ================= -->
+        <!--t_seller sec-->
         <h2>Seller Sales</h2>
 
         <input
@@ -134,7 +153,7 @@
             </tbody>
         </table>
 
-        <!-- ================= TOTAL REVENUE ================= -->
+        <!--show revenue-->
         <h2>Total Revenue</h2>
 
         <table class="data-table">

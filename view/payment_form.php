@@ -1,15 +1,13 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['payment'], $_SESSION['user_id'])) {
     header("Location: passenger_dashboard.php");
     exit;
 }
-
+// get user and payment info from session
 $method = strtoupper($_SESSION['payment']['method']);
 $amount = (int) $_SESSION['payment']['amount'];
-
-/* Read error once */
+//show error msg
 $error = $_SESSION['payment_error'] ?? '';
 unset($_SESSION['payment_error']);
 ?>
@@ -21,7 +19,6 @@ unset($_SESSION['payment_error']);
     <link rel="stylesheet" href="../public/css/payment_form.css">
 </head>
 <body>
-
 <div class="payment-container">
     <div class="payment-card">
 
@@ -49,9 +46,7 @@ unset($_SESSION['payment_error']);
                 <button type="submit" class="confirm-btn">Confirm</button>
                 <a href="passenger_dashboard.php" class="cancel-btn">Cancel</a>
             </div>
-
         </form>
-
     </div>
 </div>
 

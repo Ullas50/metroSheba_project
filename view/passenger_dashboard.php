@@ -1,14 +1,14 @@
 <?php
 session_start();
 
-/* 🚫 Disable browser cache */
+//browser caching disable
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 header("Expires: 0");
 
-/* 🔐 Auth check */
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) 
+{
     header("Location: login.php");
     exit;
 }
@@ -18,8 +18,7 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <title>MetroSheba | Book Ticket</title>
-
-    <!-- CSS -->
+    <!--css-->
     <link rel="stylesheet" href="../public/css/passenger.css">
     <link rel="stylesheet" href="../public/css/home.css">
 </head>
@@ -29,31 +28,31 @@ if (!isset($_SESSION['user_id'])) {
 
 <main class="container main-section">
 
-    <!-- LEFT CARD -->
+    <!--left card booking form -->
     <div class="form-card">
         <h2><span class="blue-text">Metro Ticket</span></h2>
         <p>Confirm your metro ticket</p>
-
+<!--ticket booking form -->
         <form id="bookingForm" novalidate>
-
+            <!--from station-->
             <div class="field">
                 <label>From</label>
                 <select id="from" name="from"></select>
                 <small class="error" id="fromError"></small>
             </div>
-
+            <!--to station -->
             <div class="field">
                 <label>To</label>
                 <select id="to" name="to"></select>
                 <small class="error" id="toError"></small>
             </div>
-
+<!--journey date-->
             <div class="field date-field">
                 <input type="date" id="journey_date" name="journey_date">
                 <label for="journey_date">Journey Date</label>
                 <small class="error" id="dateError"></small>
             </div>
-
+<!--ticket quantity-->
             <div class="field">
                 <label>Quantity</label>
                 <input
@@ -66,7 +65,7 @@ if (!isset($_SESSION['user_id'])) {
                     inputmode="numeric">
                 <small class="error" id="qtyError"></small>
             </div>
-
+<!--total price-->
             <div class="field">
                 <strong>Total: <span id="totalPrice">৳0</span></strong>
             </div>
@@ -78,17 +77,16 @@ if (!isset($_SESSION['user_id'])) {
         </form>
     </div>
 
-    <!-- RIGHT IMAGE -->
+    <!--right image-->
     <div class="image-box">
         <img src="../public/images/passenger.jpg" alt="Metro Train">
     </div>
 
 </main>
-
+<!--common footer-->
 <?php include 'partials/footer.php'; ?>
-
 <script src="../public/js/passenger.js"></script>
-
+<!--toggle for user menu-->
 <script>
 document.addEventListener("click", e => {
     const user = document.querySelector(".nav-user");
@@ -103,9 +101,11 @@ document.addEventListener("click", e => {
 </script>
 
 <script>
-/* Force back-button users to login */
-window.addEventListener("pageshow", function (event) {
-    if (event.persisted) {
+
+window.addEventListener("pageshow", function (event) 
+{
+    if (event.persisted) 
+    {
         window.location.href = "login.php";
     }
 });

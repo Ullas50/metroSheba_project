@@ -1,20 +1,18 @@
 <?php
 session_start();
-
-/* Guard */
+//ensure payment data exists
 if (
     !isset(
         $_SESSION['payment_data']['user'],
         $_SESSION['payment_data']['booking'],
         $_SESSION['payment_data']['fare']
     )
-) {
+) 
+{
     header("Location: passenger_dashboard.php");
     exit;
 }
-
 $data = $_SESSION['payment_data'];
-
 $user    = $data['user'];
 $booking = $data['booking'];
 $fare    = $data['fare'];
@@ -30,10 +28,9 @@ $fare    = $data['fare'];
 <body>
 
 <?php include 'partials/header1.php'; ?>
-
 <div class="container payment-layout">
 
-    <!-- LEFT -->
+    <!--lest(passenger info and payment selection)-->
     <div class="left">
         <div class="card">
             <h3>Passenger Details</h3>
@@ -41,7 +38,7 @@ $fare    = $data['fare'];
             <p><strong>Mobile:</strong> <?= htmlspecialchars($user['mobile']) ?></p>
             <p><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
         </div>
-
+ <!--pay method-->
         <div class="card">
             <h3>Select Payment Method</h3>
 
@@ -51,22 +48,23 @@ $fare    = $data['fare'];
                 <button data-method="rocket">Rocket</button>
                 <button data-method="upay">Upay</button>
             </div>
-
+ <!--process btn disable until method is selected-->
             <button id="proceedBtn" class="pay-btn" disabled>
                 Proceed to Payment
             </button>
         </div>
     </div>
 
-    <!-- RIGHT -->
+    <!--right journey and fare details -->
     <div class="right">
+         <!--journey details-->
         <div class="card">
             <h3>Journey Details</h3>
             <p><?= $booking['from_station'] ?> → <?= $booking['to_station'] ?></p>
             <p>Date: <?= $booking['journey_date'] ?></p>
             <p>Tickets: <?= $booking['ticket_quantity'] ?></p>
         </div>
-
+ <!--fare details-->
         <div class="card">
             <h3>Fare Details</h3>
             <div class="row"><span>Ticket Price</span><span><?= $fare['ticket'] ?></span></div>
@@ -84,7 +82,6 @@ $fare    = $data['fare'];
 </div>
 
 <?php include 'partials/footer.php'; ?>
-
 <script src="../public/js/payment.js"></script>
 </body>
 </html>

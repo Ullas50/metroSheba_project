@@ -1,11 +1,12 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'seller') {
+//only logged-in sellers can access
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'seller') 
+{
     header("Location: login.php");
     exit;
 }
-
+//disable caching back btn issues
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
 ?>
@@ -26,7 +27,7 @@ header("Pragma: no-cache");
 
 <div class="container">
 
-    <!-- SELL FORM -->
+    <!--sell form-->
     <div class="card sell-card">
         <h3>Sell Ticket</h3>
         <p class="subtitle">Enter journey details</p>
@@ -56,7 +57,7 @@ header("Pragma: no-cache");
         <div class="error" id="serverErr"></div>
     </div>
 
-    <!-- SUMMARY -->
+    <!--summary-->
     <div class="summary premium-summary">
         <h3>Ticket Summary</h3>
 
@@ -87,7 +88,7 @@ header("Pragma: no-cache");
         </div>
         <div class="summary-note">Total Fare</div>
 
-        <!-- 🔥 PAYMENT BUTTON HERE -->
+        <!--pay btn-->
        <button id="payBtn" type="button" class="pay-btn">
     Proceed to Payment
 </button>
@@ -95,7 +96,6 @@ header("Pragma: no-cache");
     </div>
 
 </div>
-
 <script src="../public/js/seller.js"></script>
 <?php include 'partials/footer.php'; ?>
 </body>

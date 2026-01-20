@@ -1,3 +1,24 @@
+<<<<<<< HEAD
+=======
+<?php
+session_start();//who is logged in
+require_once '../model/User.php';
+//check if the user id is exist
+if (!isset($_SESSION['user_id'])) 
+{
+    header("Location: login.php");
+    exit;
+}
+// fatch logged in user
+$user = fetchUserById($_SESSION['user_id']);
+
+if (!$user) 
+{
+    echo "User not found";
+    exit;
+}
+?>
+>>>>>>> 6e22563efb3462a9108f657d39cedfbad3f406ce
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +32,8 @@
 <?php include 'partials/header3.php'; ?>
 
 <div class="profile-container">
-
     <div class="profile-card">
 
-        <!-- PROFILE PHOTO -->
         <div class="profile-photo">
             <?php if (!empty($user['photo'])): ?>
                 <img src="../public/uploads/<?= htmlspecialchars($user['photo']) ?>" alt="Profile Photo">
@@ -22,11 +41,7 @@
                 <img src="../public/uploads/default.png" alt="Profile Photo">
             <?php endif; ?>
         </div>
-
-        <!-- NAME -->
         <h2><?= htmlspecialchars($user['full_name']) ?></h2>
-
-        <!-- USER INFO -->
         <div class="profile-info">
             <p><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
             <p><strong>Mobile:</strong> <?= htmlspecialchars($user['mobile']) ?></p>
@@ -42,7 +57,7 @@
             <p><strong>Gender:</strong> <?= htmlspecialchars($user['gender']) ?></p>
         </div>
 
-        <!-- ACTION -->
+        <!--action-->
         <div class="profile-actions">
     <a href="update_admin_profile1.php" class="btn-profile">
         Update Profile
@@ -52,11 +67,7 @@
         Update Password
     </a>
 </div>
-
-
-
     </div>
-
 </div>
 <?php include 'partials/footer.php'; ?>
 </body>

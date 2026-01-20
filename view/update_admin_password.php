@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 
+=======
+<?php
+session_start();
+//recv err msg 
+$errors = $_SESSION['errors'] ?? [];
+//clear err from session after retrieving
+unset($_SESSION['errors']);
+?>
+>>>>>>> 6e22563efb3462a9108f657d39cedfbad3f406ce
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,16 +18,14 @@
     <link rel="stylesheet" href="../public/css/home.css">
 </head>
 <body>
-
+<!--pass update form-->
 <div class="password-container">
-
 <form class="password-card"
       method="POST"
       action="../controller/update_password_controller_admin.php">
 
     <h2>Update Password</h2>
-
-    <!-- CURRENT PASSWORD -->
+    <!--current pass-->
     <div class="form-group <?= isset($errors['current_password']) ? 'error' : '' ?>">
         <label>Current Password</label>
         <input type="password" name="current_password">
@@ -25,8 +33,7 @@
             <small class="error-text"><?= $errors['current_password'] ?></small>
         <?php endif; ?>
     </div>
-
-    <!-- NEW PASSWORD -->
+    <!--new pass-->
     <div class="form-group <?= isset($errors['new_password']) ? 'error' : '' ?>">
         <label>New Password</label>
         <input type="password" name="new_password">
@@ -34,8 +41,7 @@
             <small class="error-text"><?= $errors['new_password'] ?></small>
         <?php endif; ?>
     </div>
-
-    <!-- CONFIRM PASSWORD -->
+    <!--confirm pass-->
     <div class="form-group <?= isset($errors['confirm_password']) ? 'error' : '' ?>">
         <label>Re-enter New Password</label>
         <input type="password" name="confirm_password">
@@ -48,10 +54,7 @@
         <button type="submit" class="btn-confirm">Confirm</button>
         <a href="../controller/admin_profile.php" class="btn-cancel">Back</a>
     </div>
-
 </form>
-
 </div>
-
 </body>
 </html>

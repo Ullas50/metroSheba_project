@@ -2,28 +2,25 @@
 session_start();
 require_once '../model/Payment.php';
 
-if (!isset($_SESSION['user_id'], $_SESSION['last_booking_id'])) {
+if (!isset($_SESSION['user_id'], $_SESSION['last_booking_id'])) 
+{
     header("Location: passenger_dashboard.php");
     exit;
 }
 
 $payment = new Payment();
-$ticket = $payment->getTicketByBooking(
-    $_SESSION['last_booking_id'],
-    $_SESSION['user_id']
-);
+$ticket = $payment->getTicketByBooking
+( $_SESSION['last_booking_id'],$_SESSION['user_id']);
 
-if (!$ticket) {
+if (!$ticket) 
+{
     echo "Ticket not found";
     exit;
 }
 
 /* FORMAT DATA */
 $journeyDate = date('Y-m-d', strtotime($ticket['journey_date']));
-$validUntil  = date(
-    'Y-m-d H:i',
-    strtotime($ticket['confirmed_at'] . ' +24 hours')
-);
+$validUntil  = date('Y-m-d H:i',strtotime($ticket['confirmed_at'] . ' +24 hours'));
 
 /* QR PAYLOAD */
 $qrData = json_encode([

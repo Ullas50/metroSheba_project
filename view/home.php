@@ -7,10 +7,8 @@
 
 </head>
 <body>
-
+<!--common header-->
 <?php include 'partials/header.php'; ?>
-
-
 <main class="container main-section">
 
     <div class="form-card">
@@ -18,8 +16,7 @@
             <span class="blue-text">Book Metro Train</span>
         </h2>
         <p>Quickly book your metro train tickets</p>
-
-        <!-- From -->
+        <!--from-->
         <div class="field">
             <label>From</label>
             <select required>
@@ -42,8 +39,7 @@
                 <option>Motijheel</option>
             </select>
         </div>
-
-        <!-- To -->
+        <!--to-->
         <div class="field">
             <label>To</label>
             <select>
@@ -66,26 +62,22 @@
                 <option>Uttara North</option>
             </select>
         </div>
-
-        <!-- Date -->
+        <!--journey date-->
         <div class="field date-field">
             <input type="date" id="journey_date" required>
             <label for="journey_date">Choose Journey Date</label>
         </div>
-
+        <!--search train-->
         <button class="search-btn" onclick="window.location.href='login.php'">
     Search Trains
 </button>
-
-
+<!--image section -->
     </div>
-
     <div class="image-box">
         <img src="../public/images/homeplatfrom.png" alt="Metro Train">
     </div>
-
 </main>
-
+<!--showing work process-->
 <section class="steps">
     <div class="container steps-box">
 
@@ -118,12 +110,11 @@
 <section class="how-it-works container">
     <div class="how-wrapper">
 
-        <!-- LEFT IMAGE -->
+        <!--left image-->
         <div class="how-image">
             <img src="../public/images/how-it-works.png" alt="How MetroSheba Works">
         </div>
-
-        <!-- RIGHT CONTENT -->
+        <!--instruction show-->
         <div class="how-content">
             <h2>How MetroSheba Works</h2>
 
@@ -138,11 +129,7 @@
 
     </div>
 </section>
-
-
-
-
-
+<!--common footer-->
 <?php include 'partials/footer.php'; ?>
 
 </body>

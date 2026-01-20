@@ -6,34 +6,34 @@
     <link rel="stylesheet" href="../public/css/forgot_password.css">
 </head>
 <body>
-
+<!--rese pass page-->
 <div class="password-container">
 
 <form id="forgotForm" class="password-card" novalidate>
 
     <h2>Reset Password</h2>
 
-    <!-- EMAIL -->
+    <!-- e-mail-->
     <div class="form-group">
         <label>Email</label>
         <input type="email" name="email">
         <small class="error-text" data-error="email"></small>
     </div>
 
-    <!-- NEW PASSWORD -->
+    <!--new pass -->
     <div class="form-group">
         <label>New Password</label>
         <input type="password" name="new_password">
         <small class="error-text" data-error="new_password"></small>
     </div>
 
-    <!-- CONFIRM PASSWORD -->
+    <!-- confirm pass-->
     <div class="form-group">
         <label>Re-enter New Password</label>
         <input type="password" name="confirm_password">
         <small class="error-text" data-error="confirm_password"></small>
     </div>
-
+ <!--action-->
     <div class="form-actions">
         <button type="submit" class="btn-confirm">Confirm</button>
         <a href="login.php" class="btn-cancel">Back</a>
