@@ -29,6 +29,7 @@ $qrData = json_encode([
 <head>
     <title>MetroSheba | Seller Ticket</title>
     <link rel="stylesheet" href="../public/css/ticket_seller.css">
+    <link rel="stylesheet" href="../public/css/ticket.css">
 </head>
 <body>
 
@@ -62,6 +63,7 @@ $qrData = json_encode([
 
         <div class="ticket-right">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=<?= urlencode($qrData) ?>">
+            <a href="../view/passenger_dashboard.php" class="logout">Back</a>
             <button onclick="window.print()">Print Ticket</button>
         </div>
 

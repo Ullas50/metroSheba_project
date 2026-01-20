@@ -3,26 +3,19 @@
     font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* LOCK SCROLL */
-html, body {
+body {
     margin: 0;
-    height: 100%;
-    overflow: hidden;
     background: #eef2f7;
 }
 
 /* MAIN CARD */
 .ticket-wrapper {
-    width: 900px;
-    max-height: 620px;
+    max-width: 900px;
     background: #ffffff;
-    margin: auto;
+    margin: 30px auto;
     padding: 30px;
     border-radius: 18px;
     box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-
-    display: flex;
-    flex-direction: column;
 }
 
 /* HEADER */
@@ -31,13 +24,12 @@ html, body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px dashed #ddd;
-    padding-bottom: 14px;
+    padding-bottom: 16px;
 }
 
 .ticket-header h1 {
     color: #1e88e5;
     margin: 0;
-    font-size: 28px;
 }
 
 .badge {
@@ -49,91 +41,141 @@ html, body {
     font-weight: 600;
 }
 
-/* BODY */
+/* BODY LAYOUT */
 .ticket-body {
     display: flex;
     gap: 30px;
-    margin-top: 22px;
-    flex: 1;
+    margin-top: 25px;
 }
 
-/* LEFT */
+/* LEFT SIDE */
 .ticket-left {
     flex: 1.4;
 }
 
-.ticket-left h3 {
-    font-size: 17px;
-    margin-bottom: 10px;
+.ticket-section {
+    margin-bottom: 18px;
+}
+
+.ticket-section h3 {
+    margin-bottom: 8px;
+    font-size: 16px;
     color: #333;
 }
 
-.ticket-left p {
+.ticket-section p {
     margin: 4px 0;
     color: #444;
-    font-size: 14px;
 }
 
-.ticket-left hr {
-    margin: 16px 0;
-    border: none;
-    border-top: 1px solid #e0e0e0;
+/* ROUTE */
+.route {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f5f8ff;
+    padding: 16px;
+    border-radius: 14px;
+}
+
+.route .label {
+    font-size: 13px;
+    color: #777;
+}
+
+.route .value {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.route .arrow {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e88e5;
 }
 
 /* VALIDITY */
 .ticket-validity {
-    margin-top: 16px;
     padding: 14px;
     background: #e8f5e9;
     border-left: 5px solid #2e7d32;
     border-radius: 10px;
     color: #2e7d32;
     font-size: 14px;
-    font-weight: 500;
 }
 
-/* RIGHT */
+/* RIGHT SIDE */
 .ticket-right {
     flex: 1;
+    background: #f9fbff;
+    border-radius: 18px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    gap: 18px;
+    box-shadow: inset 0 0 0 1px #e3e8f5;
 }
 
-/* QR */
+/* QR IMAGE */
 .ticket-right img {
     width: 220px;
     height: 220px;
-    border-radius: 14px;
+    border-radius: 16px;
+    background: #fff;
+    padding: 10px;
     border: 6px solid #f0f0f0;
+}
+
+/* ACTION BUTTONS */
+.ticket-right button,
+.ticket-right .logout {
+    width: 100%;
+    text-align: center;
+    padding: 14px 0;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all 0.25s ease;
 }
 
 /* PRINT BUTTON */
 .ticket-right button {
-    margin-top: 18px;
-    width: 100%;
-    padding: 12px 0;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
     background: linear-gradient(135deg, #1e88e5, #1565c0);
-    color: #ffffff;
+    color: #fff;
 }
 
-/* RESPONSIVE (STACK, STILL NO SCROLL) */
+.ticket-right button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(30,136,229,0.35);
+}
+
+.ticket-right button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* BACK BUTTON */
+.ticket-right .logout {
+    background: linear-gradient(135deg, #e53935, #b71c1c);
+    color: #fff;
+}
+
+.ticket-right .logout:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(211,47,47,0.35);
+}
+
+.ticket-right .logout:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
-    html, body {
-        overflow: auto;
-    }
-
-    .ticket-wrapper {
-        width: 95%;
-        max-height: none;
-        margin: 20px auto;
-    }
-
     .ticket-body {
         flex-direction: column;
     }
@@ -141,20 +183,18 @@ html, body {
 
 /* PRINT MODE */
 @media print {
-    html, body {
-        overflow: visible;
+    body {
         background: #fff;
     }
 
     .ticket-wrapper {
         box-shadow: none;
-        max-height: none;
-        width: 100%;
         margin: 0;
         padding: 0;
     }
 
-    button {
+    .ticket-right button,
+    .ticket-right .logout {
         display: none;
     }
 }
