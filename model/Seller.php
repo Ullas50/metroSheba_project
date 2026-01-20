@@ -1,17 +1,18 @@
 <?php
-require_once __DIR__ . '/../core/db.php';
+require_once __DIR__ . '/../core/db.php'; // database connection
 
 class Seller {
-
+    // Store database connection
     private $conn;
 
     public function __construct() {
+        // Create database connection on object creation
         $this->conn = getConnection();
     }
-
+    // Get ticket details by sale ID
     public function getTicketBySale($saleId) {
-        $stmt = $this->conn->prepare(
-            "SELECT
+        $stmt = $this->conn->prepare( 
+            "SELECT 
                 ss.id,
                 ss.journey_date,
                 ss.ticket_quantity,
@@ -28,9 +29,9 @@ class Seller {
              JOIN stations ts ON ts.id = ss.to_station_id
              WHERE ss.id = ?"
         );
-
+        // Bind sale ID
         $stmt->bind_param("i", $saleId);
-        $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
+        $stmt->execute(); // Execute query
+        return $stmt->get_result()->fetch_assoc(); //   Return ticket details
     }
 }

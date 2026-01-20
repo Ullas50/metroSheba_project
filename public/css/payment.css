@@ -60,7 +60,7 @@
     border-radius: 8px;
     cursor: pointer;
 }
-/* ================= BASE ================= */
+/* BASE  */
 body {
     background: #f4f6f9;
 }
@@ -89,7 +89,7 @@ body {
     width: 50%;
 }
 
-/* ================= CARD ================= */
+/* CARD  */
 .card {
     background: #ffffff;
     padding: 24px 26px;
@@ -112,7 +112,7 @@ body {
     color: #1e88e5;
 }
 
-/* ================= TEXT ================= */
+/*  TEXT  */
 .card p {
     margin: 6px 0;
     font-size: 15px;
@@ -123,7 +123,7 @@ body {
     color: #222;
 }
 
-/* ================= ROWS ================= */
+/*  ROWS  */
 .row {
     display: flex;
     justify-content: space-between;
@@ -157,7 +157,7 @@ body {
     color: #d32f2f;
 }
 
-/* ================= PAYMENT METHODS ================= */
+/*  PAYMENT METHODS  */
 .payment-methods {
     display: flex;
     flex-direction: column;
@@ -193,7 +193,7 @@ body {
     transform: scale(1.02);
 }
 
-/* ================= PAY BUTTON ================= */
+/* PAY BUTTON  */
 .pay-btn {
     margin-top: 18px;
     width: 100%;
@@ -229,7 +229,7 @@ body {
     transform: scale(0.97);
 }
 
-/* ================= RESPONSIVE ================= */
+/*  RESPONSIVE */
 @media (max-width: 900px) {
     .payment-layout {
         flex-direction: column;
