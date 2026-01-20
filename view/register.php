@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start();//old input & error msg
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +8,7 @@ session_start();
     <meta charset="UTF-8">
     <title>MetroSheba | Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<!--css-->
     <link rel="stylesheet" href="../public/css/register.css">
     <link rel="stylesheet" href="../public/css/home.css">
 </head>
@@ -18,7 +18,7 @@ session_start();
     <?php include 'partials/header.php'; ?>
 
     <div class="register-page">
-
+<!--left image-->
         <div class="register-image">
             <img src="../public/images/register.jpg" alt="MetroSheba">
             <div class="image-overlay">
@@ -26,7 +26,7 @@ session_start();
                 <p>Fast & Easy Metro Ticket Booking</p>
             </div>
         </div>
-
+<!--right from-->
         <section class="register-container">
 
             <div class="register-header">
@@ -39,7 +39,7 @@ session_start();
                 action="../controller/registerController.php"
                 enctype="multipart/form-data">
 
-                <!-- NAME -->
+                <!--name-->
                 <div class="row">
                     <div>
                         <label>First Name</label>
@@ -62,7 +62,7 @@ session_start();
 
 
 
-                <!-- EMAIL -->
+                <!--mail-->
                 <label>Email</label>
                 <input type="text" id="email" name="email"
                     value="<?= htmlspecialchars($_SESSION['old']['email'] ?? '') ?>">
@@ -70,21 +70,21 @@ session_start();
                     <?= htmlspecialchars($_SESSION['errors']['email'] ?? '') ?>
                 </small>
 
-                <!-- PHONE -->
+                <!--mobile num-->
                 <label>Mobile Number</label>
                 <input type="text" id="phone" name="phone">
                 <small id="phoneError" class="error">
                     <?= htmlspecialchars($_SESSION['errors']['phone'] ?? '') ?>
                 </small>
 
-                <!-- DOB -->
+                <!--date of birth-->
                 <label>Date of Birth</label>
                 <input type="date" id="dob" name="dob">
                 <small id="dobError" class="error">
                     <?= htmlspecialchars($_SESSION['errors']['dob'] ?? '') ?>
                 </small>
 
-                <!-- GENDER -->
+                <!--gender-->
                 <label>Gender</label>
                 <div class="radio-group">
                     <label><input type="radio" name="gender" value="male"> Male</label>
@@ -95,35 +95,35 @@ session_start();
                     <?= htmlspecialchars($_SESSION['errors']['gender'] ?? '') ?>
                 </small>
 
-                <!-- NID -->
+                <!--nid-->
                 <label>NID Number</label>
                 <input type="text" id="nidNumber" name="nidNumber">
                 <small id="nidNumberError" class="error">
                     <?= htmlspecialchars($_SESSION['errors']['nid'] ?? '') ?>
                 </small>
 
-                <!-- PASSWORD -->
+                <!--pass-->
                 <label>Password</label>
                 <input type="password" id="password" name="password">
                 <small id="passwordError" class="error">
                     <?= htmlspecialchars($_SESSION['errors']['password'] ?? '') ?>
                 </small>
 
-                <!-- CONFIRM -->
+                <!--confirm pass -->
                 <label>Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword">
                 <small id="confirmPasswordError" class="error">
                     <?= htmlspecialchars($_SESSION['errors']['confirmPassword'] ?? '') ?>
                 </small>
 
-                <!-- PHOTO (FIXED ID) -->
+                <!--profile pic-->
                 <label>Profile Photo</label>
                 <input type="file" id="profilePhoto" name="profile-photo">
                 <small id="profilePhotoError" class="error">
                     <?= htmlspecialchars($_SESSION['errors']['photo'] ?? '') ?>
                 </small>
 
-                <!-- TERMS -->
+                <!--terms-->
                 <div class="terms">
                     <label class="terms-label">
                         <input type="checkbox" id="terms" name="terms">
@@ -132,28 +132,24 @@ session_start();
                             <a href="terms.php" target="_blank">Terms &amp; Conditions</a>
                         </span>
                     </label>
-
                     <small id="termsError" class="error">
                         <?= htmlspecialchars($_SESSION['errors']['terms'] ?? '') ?>
                     </small>
                 </div>
 
-
+<!--submit btn-->
                 <button type="submit">Register</button>
-
                 <p class="login-link">
                     Already registered? <a href="login.php">Login</a>
                 </p>
-
             </form>
         </section>
     </div>
-
+<!--js validation-->
     <script src="../public/js/register.js"></script>
     <?php include 'partials/footer.php'; ?>
-
+<!--clear old input & erroe session data-->
     <?php unset($_SESSION['errors'], $_SESSION['old']); ?>
 
 </body>
-
 </html>
