@@ -1,13 +1,12 @@
 <?php
 session_start();
 
-/* REMOVE ALL SESSION DATA */
+// clear all session data
 session_unset();
 session_destroy();
 
-/* REMOVE REMEMBER ME COOKIE (IF EXISTS) */
+//remove "remember me" cookie it it exists
 setcookie('remember_email', '', time() - 3600, '/');
 
-/* REDIRECT TO LOGIN PAGE */
 header("Location: ../view/login.php");
 exit;
