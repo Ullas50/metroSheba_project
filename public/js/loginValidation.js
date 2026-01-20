@@ -1,3 +1,4 @@
+//validate email field
 let emailValidation = () => {
   const email = document.getElementById("email").value.trim();
   const errorDiv = document.getElementById("emailError");
@@ -27,6 +28,7 @@ let emailValidation = () => {
   errorDiv.textContent = "";
   return true;
 };
+//validate password field
 
 let passwordValidation = () => {
   const password = document.getElementById("password").value.trim();
@@ -45,12 +47,12 @@ let passwordValidation = () => {
   errorDiv.textContent = "";
   return true;
 };
-
+// Handle form submission
 const loginForm = document.getElementById("loginForm");
 
 loginForm.addEventListener("submit", function (event) {
   event.preventDefault();
-
+// Only submit if both fields are valid
   if (emailValidation() && passwordValidation()) {
     loginForm.submit();
   }

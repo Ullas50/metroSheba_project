@@ -1,4 +1,4 @@
-// ================= ELEMENTS =================
+// ELEMENTS 
 const from = document.getElementById("from");
 const to = document.getElementById("to");
 const dateInput = document.getElementById("journey_date");
@@ -11,11 +11,11 @@ const toError = document.getElementById("toError");
 const dateError = document.getElementById("dateError");
 const qtyError = document.getElementById("qtyError");
 
-// ================= INITIAL =================
+//INITIAL
 from.innerHTML = `<option value="" disabled selected hidden>Select Departure Station</option>`;
 to.innerHTML   = `<option value="" disabled selected hidden>Select Arrival Station</option>`;
 
-// ================= LOAD STATIONS =================
+// LOAD STATIONS 
 fetch("../controller/GetStations.php")
     .then(res => res.json())
     .then(stations => {
@@ -25,7 +25,7 @@ fetch("../controller/GetStations.php")
         });
     });
 
-// ================= PRICE CALC =================
+//  PRICE CALCulation
 function calculatePrice() {
     if (!from.value || !to.value || from.value === to.value) {
         totalPrice.textContent = "৳0";
@@ -43,7 +43,7 @@ function calculatePrice() {
     el.addEventListener("change", calculatePrice)
 );
 
-// ================= QUANTITY CONTROL =================
+// QUANTITY CONTROL 
 
 // Disable mouse wheel changing number
 qtyInput.addEventListener("wheel", e => e.preventDefault());
@@ -54,7 +54,7 @@ qtyInput.addEventListener("input", () => {
     calculatePrice();
 });
 
-// ================= CLEAR ERRORS =================
+//  CLEAR ERRORS 
 function clearErrors() {
     fromError.textContent = "";
     toError.textContent = "";
@@ -66,7 +66,7 @@ document.querySelectorAll("select, input").forEach(el => {
     el.addEventListener("input", clearErrors);
 });
 
-// ================= SUBMIT =================
+// submit
 document.getElementById("bookingForm").addEventListener("submit", async e => {
     e.preventDefault();
     clearErrors();

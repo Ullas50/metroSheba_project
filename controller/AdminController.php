@@ -11,19 +11,19 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 $admin = new Admin(); // create a admin odject 
 
-/* DELETE PASSENGER */
+
 if (isset($_POST['booking_id'])) {
     echo $admin->deleteBooking((int)$_POST['booking_id']) ? "OK" : "FAIL"; // try to delete the booking
     exit;
 }
 
-/* DELETE SELLER */
+
 if (isset($_POST['seller_sale_id'])) {
     echo $admin->deleteSellerSale((int)$_POST['seller_sale_id']) ? "OK" : "FAIL"; // try to delete the seller sale record
     exit;
 }
 
-/* REFRESH SALES */
+
 if (isset($_GET['refresh'])) { 
 
 // get the latest sales data and total 

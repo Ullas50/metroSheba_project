@@ -14,7 +14,7 @@ const errorBox = document.getElementById('serverErr');
 const pricePerStation = 10;
 let stations = [];
 
-/* Load stations */
+//Load stations 
 fetch('../controller/GetStations.php')
     .then(res => res.json())
     .then(data => {
@@ -61,7 +61,7 @@ function updateSummary() {
     sTotal.textContent = total;
 }
 
-/* PAYMENT BUTTON SUBMIT */
+//PAYMENT BUTTON SUBMIT 
 payBtn.addEventListener('click', () => {
     errorBox.textContent = '';
 

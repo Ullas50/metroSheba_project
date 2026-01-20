@@ -1,11 +1,8 @@
-/* =========================
-   GLOBAL STATE
-========================= */
-let emailBlocked = false;
+//GLOBAL STAte
 
-/* =========================
-   CACHE ELEMENTS (DO NOT RELY ON GLOBAL IDS)
-========================= */
+
+  // CACHE ELEMENTS (DO NOT RELY ON GLOBAL IDS)
+
 const form = document.getElementById("registrationForm");
 const firstName = document.getElementById("firstName");
 const lastName = document.getElementById("lastName");
@@ -16,9 +13,9 @@ const nidNumber = document.getElementById("nidNumber");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
 
-/* =========================
-   EMAIL AJAX CHECK
-========================= */
+
+   //EMAIL AJAX CHECK
+
 email.addEventListener("blur", function () {
   const value = this.value.trim();
   const error = document.getElementById("emailError");
@@ -53,9 +50,9 @@ email.addEventListener("blur", function () {
     });
 });
 
-/* =========================
-   ERROR HELPERS
-========================= */
+
+   //ERROR HELPERS
+
 function showError(input, message) {
   const errorEl = document.getElementById(input.id + "Error");
   if (!errorEl) return;
@@ -81,9 +78,9 @@ function requiredCheck(input, message) {
   return true;
 }
 
-/* =========================
-   BLUR VALIDATION
-========================= */
+
+  // BLUR VALIDATION
+
 firstName.addEventListener("blur", () =>
   requiredCheck(firstName, "First name is required")
 );
@@ -144,18 +141,17 @@ confirmPassword.addEventListener("blur", function () {
   }
 });
 
-/* =========================
-   GENDER VALIDATION
-========================= */
+
+  // GENDER VALIDATION
 document.querySelectorAll("input[name='gender']").forEach(radio => {
   radio.addEventListener("change", () => {
     document.getElementById("genderError").textContent = "";
   });
 });
 
-/* =========================
-   FINAL SUBMIT VALIDATION
-========================= */
+
+  // FINAL SUBMIT VALIDATION
+
 form.addEventListener("submit", function (e) {
   let valid = true;
 
