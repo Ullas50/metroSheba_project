@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start();//for login and error msg
 ?>
 
 <!DOCTYPE html>
@@ -11,12 +11,12 @@ session_start();
      <link rel="stylesheet" href="../public/css/home.css">
 </head>
 <body>
-
+<!--common header-->
 <?php include 'partials/header.php'; ?>
 
 <div class="login-page">
 
-    <!-- LEFT IMAGE -->
+    <!--log-in page left image-->
 <div class="login-image">
     <div class="image-overlay">
         <h1>MetroSheba</h1>
@@ -24,26 +24,24 @@ session_start();
     </div>
 </div>
 
-    <!-- RIGHT FORM -->
+    <!--right sile login form-->
     <div class="login-form-container">
 
         <h2>Login to your account</h2>
 
-        <!-- ✅ ERROR MESSAGE (REGISTRATION STYLE) -->
+        <!--error msg (log-in failed)-->
         <?php if (isset($_SESSION['login_error'])): ?>
             <div class="form-error">
                 <?= $_SESSION['login_error']; ?>
             </div>
             <?php unset($_SESSION['login_error']); ?>
         <?php endif; ?>
-
+<!--login form-->
         <form method="POST" action="../controller/loginController.php">
-
     <label>Email</label>
     <input type="text" name="email"
            value="<?= isset($_COOKIE['remember_email']) ? $_COOKIE['remember_email'] : '' ?>"
            placeholder="Enter your email">
-
     <label>Password</label>
 
 <div class="password-wrapper">
@@ -51,16 +49,14 @@ session_start();
     <span class="toggle-password" id="togglePassword">👁️</span>
 </div>
 
-
-    <!-- ✅ ERROR BELOW INPUTS -->
+    <!--show error-->
     <?php if (isset($_SESSION['login_error'])): ?>
         <div class="form-error">
             <?= $_SESSION['login_error']; ?>
         </div>
         <?php unset($_SESSION['login_error']); ?>
     <?php endif; ?>
-
-
+<!--remember me chechbok-->
     <div class="remember-row">
     <label class="remember-label">
         <input type="checkbox" name="remember-me"
@@ -68,7 +64,6 @@ session_start();
         <span>Remember Me</span>
     </label>
 </div>
-
 
     <button type="submit">Login</button>
 </form>
@@ -89,10 +84,13 @@ session_start();
 document.getElementById("togglePassword").addEventListener("click", function () {
     const passwordInput = document.getElementById("password");
 
-    if (passwordInput.type === "password") {
+    if (passwordInput.type === "password") 
+        {
         passwordInput.type = "text";
         this.textContent = "🙈";
-    } else {
+    } 
+    else 
+    {
         passwordInput.type = "password";
         this.textContent = "👁️";
     }
