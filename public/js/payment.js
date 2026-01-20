@@ -1,8 +1,8 @@
 let selectedMethod = null;
-
+// When a payment method button is clicked
 document.querySelectorAll(".payment-methods button").forEach(btn => {
     btn.addEventListener("click", () => {
-
+ // Remove "active" from all buttons
         document
             .querySelectorAll(".payment-methods button")
             .forEach(b => b.classList.remove("active"));
@@ -20,6 +20,7 @@ document.getElementById("proceedBtn").addEventListener("click", () => {
         return;
     }
 
+    // Send the selected method to the server
     fetch("../controller/SelectPaymentMethod.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
