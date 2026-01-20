@@ -10,8 +10,8 @@ if (
     isset($_POST['ajax']) &&
     $_POST['ajax'] === 'check_email'
 ) {
-    $email = trim($_POST['email'] ?? '');
-
+    $email = trim($_POST['email'] ?? ''); //clean the email input
+// If email exists, return error response
     if ($email !== '' && emailExists($email)) {
         echo json_encode([
             'status'  => 'error',
@@ -31,7 +31,7 @@ if (
     isset($_POST['ajax']) &&
     $_POST['ajax'] === 'validate_field'
 ) {
-    $field = $_POST['field'] ?? '';
+    $field = $_POST['field'] ?? '';  // identify which field is being validated
     $value = trim($_POST['value'] ?? '');
 
     $error = '';
@@ -95,7 +95,7 @@ if (
             break;
     }
 
-    if ($error !== '') {
+    if ($error !== '') { // return validation 
         echo json_encode([
             'status'  => 'error',
             'message' => $error
@@ -116,63 +116,65 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $errors = [];
 
-/* FIRST NAME */
+// basic validation
+
+//first name
 if (empty($_POST['firstName'])) {
     $errors['firstName'] = "First name is required";
 }
 
-/* LAST NAME */
+// last name
 if (empty($_POST['lastName'])) {
     $errors['lastName'] = "Last name is required";
 }
 
-/* EMAIL */
+//email
 if (empty($_POST['email'])) {
     $errors['email'] = "Email is required";
 }
 
-/* PASSWORD */
+//password
 if (empty($_POST['password'])) {
     $errors['password'] = "Password is required";
 } elseif (strlen($_POST['password']) < 6) {
     $errors['password'] = "Password must be at least 6 characters";
 }
 
-/* PHONE */
+//phone
 if (empty($_POST['phone'])) {
     $errors['phone'] = "Mobile number is required";
 } elseif (strlen(trim($_POST['phone'])) !== 11) {
     $errors['phone'] = "Mobile number must be exactly 11 digits";
 }
 
-/* NID */
+//nid
 if (empty($_POST['nidNumber'])) {
     $errors['nid'] = "NID is required";
 } elseif (strlen(trim($_POST['nidNumber'])) !== 10) {
     $errors['nid'] = "NID must be exactly 10 digits";
 }
 
-/* DOB */
+//dob
 if (empty($_POST['dob'])) {
     $errors['dob'] = "Date of birth is required";
 }
 
-/* GENDER */
+//gender
 if (empty($_POST['gender'])) {
     $errors['gender'] = "Gender is required";
 }
 
-/* TERMS */
+//terms
 if (!isset($_POST['terms'])) {
     $errors['terms'] = "You must accept the Terms & Conditions";
 }
 
-/* PHOTO */
+//photo
 if (!isset($_FILES['profile-photo']) || $_FILES['profile-photo']['error'] !== 0) {
     $errors['photo'] = "Profile photo is required";
 }
 
-/* REDIRECT IF ERRORS */
+// send back if any error
 if (!empty($errors)) {
     $_SESSION['errors'] = $errors;
     $_SESSION['old'] = $_POST;
@@ -180,7 +182,7 @@ if (!empty($errors)) {
     exit;
 }
 
-/* FINAL EMAIL CHECK */
+//final email check
 if (emailExists($_POST['email'])) {
     $_SESSION['errors']['email'] = "Email already registered";
     $_SESSION['old'] = $_POST;
@@ -188,12 +190,12 @@ if (emailExists($_POST['email'])) {
     exit;
 }
 
-/* UPLOAD PHOTO */
+//up;oad photo
 $ext = pathinfo($_FILES['profile-photo']['name'], PATHINFO_EXTENSION);
 $photoName = time() . "_" . uniqid() . "." . $ext;
 $uploadDir = "../public/uploads/";
 
-if (!is_dir($uploadDir)) {
+if (!is_dir($uploadDir)) { //create upload directory if it doesn’t exist
     mkdir($uploadDir, 0777, true);
 }
 
@@ -203,7 +205,7 @@ if (!move_uploaded_file($_FILES['profile-photo']['tmp_name'], $uploadDir . $phot
     exit;
 }
 
-/* INSERT USER */
+// insert user info database
 $user = [
     'full_name' => trim($_POST['firstName']) . " " . trim($_POST['lastName']),
     'email'     => trim($_POST['email']),
