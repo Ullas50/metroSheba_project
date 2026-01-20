@@ -1,12 +1,8 @@
-// ADMIN DASHBOARD JS
-    //Search, delete actions and revenue refresh handled here 
-  
+// ADMIN DASHBOARD 
+    //Search, delete actions and revenue refresh handled
 
-
-
-  // PASSENGER SEARCH (NO TABLE ID REQUIRED)
+  // PASSENGER SEARCH
 const searchInput = document.getElementById("searchInput");
-
 if (searchInput) {
     searchInput.addEventListener("keyup", () => {
         const keyword = searchInput.value.toLowerCase();
@@ -21,7 +17,7 @@ if (searchInput) {
 }
 
 
-//Seller search feature Works same as passenger search
+//Seller search
 const sellerSearch = document.getElementById("sellerSearch");
 
 if (sellerSearch) {
@@ -63,8 +59,7 @@ function deleteBooking(id) {
 }
 
 
-//DELETE SELLER SALE 
-
+//DELETE SELLER SALE RECORD
 function deleteSellerSale(id) {
     if (!confirm("Delete this seller sale?")) return;
 

@@ -12,7 +12,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
         <nav>
-            <a href="admin_dashboard.php" class="nav-link">Home</a>
+            <a href="AdminDashboardController.php" class="nav-link">Home</a>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <div class="nav-user">
                     <span class="nav-link nav-user-toggle">

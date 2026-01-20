@@ -1,23 +1,4 @@
-<?php
-session_start();
-require_once '../model/Admin.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
-    exit;
-}
-
-if (!isset($_GET['id'])) {
-    exit("Invalid request");
-}
-
-$admin = new Admin();
-$data = $admin->getPassengerDetails((int)$_GET['id']);
-
-if (!$data) {
-    exit("Passenger not found");
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +29,7 @@ if (!$data) {
         <div><strong>Total Price:</strong> ৳<?= number_format($data['total_price']) ?></div>
     </div>
 
-    <a href="admin_dashboard.php" class="back-btn">Back to Dashboard</a>
+    <a href="AdminDashboardController.php" class="back-btn">Back to Dashboard</a>
 
 </div>
 

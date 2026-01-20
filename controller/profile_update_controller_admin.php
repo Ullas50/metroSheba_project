@@ -17,8 +17,6 @@ if (!$user) {
 
 $altMobile = trim($_POST['alt_mobile'] ?? '');// get alternative mobile number from form
 
-// validation alternative mobile number
- //  alternative number must be exactly 11 digits
 if ($altMobile !== '') {
 
    
@@ -60,5 +58,7 @@ $stmt = $conn->prepare(
 $stmt->bind_param("ssi", $photoName, $altMobile, $_SESSION['user_id']);
 $stmt->execute();
 
-header("Location: ../view/admin_profile.php");
+header("Location: ../controller/admin_profile.php");
 exit;
+
+

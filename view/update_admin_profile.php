@@ -1,23 +1,3 @@
-<?php
-session_start();
-$errors = $_SESSION['errors'] ?? [];
-unset($_SESSION['errors']);
-require_once '../model/User.php';
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit;
-}
-
-$user = fetchUserById($_SESSION['user_id']);
-if (!$user) {
-    echo "User not found";
-    exit;
-}
-
-$error = $_SESSION['profile_error'] ?? '';
-unset($_SESSION['profile_error']);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,7 +78,7 @@ unset($_SESSION['profile_error']);
     <!-- ACTIONS -->
     <div class="form-actions">
         <button type="submit" class="btn-confirm">Confirm</button>
-        <a href="admin_profile.php" class="btn-cancel">Cancel</a>
+        <a href="../controller/admin_profile.php" class="btn-cancel">Cancel</a>
     </div>
 
    

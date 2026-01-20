@@ -1,8 +1,4 @@
-<?php
-session_start();
-$errors = $_SESSION['errors'] ?? [];
-unset($_SESSION['errors']);
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +46,7 @@ unset($_SESSION['errors']);
 
     <div class="form-actions">
         <button type="submit" class="btn-confirm">Confirm</button>
-        <a href="admin_profile.php" class="btn-cancel">Back</a>
+        <a href="../controller/admin_profile.php" class="btn-cancel">Back</a>
     </div>
 
 </form>
