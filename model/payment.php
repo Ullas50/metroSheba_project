@@ -1,15 +1,17 @@
 <?php
 require_once __DIR__ . '/../core/db.php';
 
-class Payment
-{
-    private $conn;
 
+// Payment model class
+class Payment
+{  // Store database connection
+    private $conn;
+// Create database connection on object creation
     public function __construct()
     {
         $this->conn = getConnection();
     }
-
+// Get passenger details by user ID
     public function getPassenger($userId)
     {
         $stmt = $this->conn->prepare(
@@ -19,9 +21,9 @@ class Payment
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
-
+        // Get full booking passenger details
     public function getBookingDetails($bookingId, $userId)
-    {
+    {   // Prepare booking details query
         $stmt = $this->conn->prepare("
             SELECT 
                 b.ticket_quantity,
@@ -36,16 +38,16 @@ class Payment
             WHERE b.id = ?
               AND b.user_id = ?
         ");
-
+        // Bind booking ID and user ID
         $stmt->bind_param("ii", $bookingId, $userId);
-        $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
+        $stmt->execute(); // Execute query
+        return $stmt->get_result()->fetch_assoc(); // Return booking details
     }
-
+// Get ticket details by booking ID and user ID
     public function getTicketByBooking($bookingId, $userId)
-    {
+    {   // Prepare ticket details query
         $stmt = $this->conn->prepare("
-            SELECT 
+            SELECT // Select relevant ticket and passenger fields
                 b.id AS booking_id,
                 b.ticket_quantity,
                 b.journey_date,
@@ -64,41 +66,41 @@ class Payment
               AND b.user_id = ?
               AND b.booking_status = 'confirmed'
         ");
-
+// Bind booking ID and user ID
         $stmt->bind_param("ii", $bookingId, $userId);
-        $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
+        $stmt->execute();// Execute query
+        return $stmt->get_result()->fetch_assoc();// Return ticket details
     }
-
+    // Create payment record
     public function createPayment(int $bookingId, string $method, int $amount)
-    {
+    {// Generate unique transaction ID
         $transactionId = uniqid('TXN_', true);
 
-        $stmt = $this->conn->prepare(
+        $stmt = $this->conn->prepare( // Prepare insert query
             "INSERT INTO payments
              (booking_id, payment_method, transaction_id, paid_amount, payment_status)
              VALUES (?, ?, ?, ?, 'success')"
         );
-
+        // Bind booking ID, method, transaction ID, and amount
         $stmt->bind_param("issi", $bookingId, $method, $transactionId, $amount);
         return $stmt->execute();
     }
 
     public function confirmBooking(int $bookingId)
-    {
+    { // Prepare update query
         $stmt = $this->conn->prepare(
             "UPDATE bookings
-             SET booking_status = 'confirmed',
+             SET booking_status = 'confirmed', // Set confirmed status and timestamp
                  confirmed_at = NOW()
              WHERE id = ?"
         );
 
-        $stmt->bind_param("i", $bookingId);
+        $stmt->bind_param("i", $bookingId); // Bind booking ID  
         return $stmt->execute();
     }
-
+        // Get purchase history for a user
  public function getPurchaseHistory($userId)
-{
+{ // Prepare purchase history query
     $stmt = $this->conn->prepare("
         SELECT 
             b.id AS booking_id,
@@ -120,9 +122,9 @@ class Payment
         ORDER BY b.confirmed_at DESC
     ");
 
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->bind_param("i", $userId); // Bind user ID
+    $stmt->execute(); // Execute query
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);        // Return purchase history
 }
 
 

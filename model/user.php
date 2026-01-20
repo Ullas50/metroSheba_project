@@ -1,29 +1,25 @@
 <?php
-require_once "../core/db.php";
+require_once "../core/db.php"; // Include database connection
 
-/* =========================
-   FETCH USER BY EMAIL (LOGIN)
-========================= */
+// FETCH USER BY EMAIL (LOGIN)
 function fetchUser($email) {
-    $conn = getConnection();
-    $email = mysqli_real_escape_string($conn, $email);
+    $conn = getConnection(); // Get database connection
+    $email = mysqli_real_escape_string($conn, $email); // Sanitize email input
 
-    $sql = "SELECT * FROM users WHERE email='$email' LIMIT 1";
-    $result = mysqli_query($conn, $sql);
-
+    $sql = "SELECT * FROM users WHERE email='$email' LIMIT 1"; // Prepare SQL query
+    $result = mysqli_query($conn, $sql); // Execute query
+        // Return user data if found
     if ($result && mysqli_num_rows($result) === 1) {
-        return mysqli_fetch_assoc($result);
+        return mysqli_fetch_assoc($result); // Fetch and return user record
     }
     return false;
 }
 
-/* =========================
-   INSERT USER (REGISTER)
-========================= */
-function insertUser($user) {
-    $conn = getConnection();
+// INSERT NEW USER
+function insertUser($user) { // $user is associative array with user details
+    $conn = getConnection(); // Get database connection
 
-    $full_name = mysqli_real_escape_string($conn, $user['full_name']);
+    $full_name = mysqli_real_escape_string($conn, $user['full_name']); 
     $email     = mysqli_real_escape_string($conn, $user['email']);
     $password  = password_hash($user['password'], PASSWORD_DEFAULT);
     $nid       = mysqli_real_escape_string($conn, $user['nid']);
@@ -37,56 +33,50 @@ function insertUser($user) {
     if ($check && mysqli_num_rows($check) > 0) {
         return "EMAIL_EXISTS";
     }
-
+    // Insert new user record
     $sql = "INSERT INTO users
-        (role, full_name, email, password, nid, dob, gender, mobile, photo, created_at)
+        (role, full_name, email, password, nid, dob, gender, mobile, photo, created_at) // Insert user fields
         VALUES
         ('customer','$full_name','$email','$password','$nid','$dob','$gender','$mobile','$photo',NOW())";
 
-    if (!mysqli_query($conn, $sql)) {
+    if (!mysqli_query($conn, $sql)) { // Execute insert query
         return mysqli_error($conn); // SHOW REAL DB ERROR
     }
 
     return true;
 }
 
-/* =========================
-   FETCH ALL USERS
-========================= */
+// FETCH ALL USERS
 function fetchAllUsers() {
-    $conn = getConnection();
+    $conn = getConnection(); // Get database connection
     $sql = "SELECT * FROM users ORDER BY id DESC";
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql); // Execute query
 
-    $users = [];
+    $users = []; // Initialize users array
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $users[] = $row;
+            $users[] = $row; // Append each user record to users array
         }
     }
     return $users;
 }
 
-/* =========================
-   FETCH USER BY ID
-========================= */
-function fetchUserById($id) {
+// FETCH USER BY ID
+function fetchUserById($id) { // Fetch user details by ID
     $conn = getConnection();
-    $id = intval($id);
+    $id = intval($id); // Sanitize ID input
 
-    $sql = "SELECT * FROM users WHERE id=$id LIMIT 1";
-    $result = mysqli_query($conn, $sql);
+    $sql = "SELECT * FROM users WHERE id=$id LIMIT 1"; // Prepare SQL query
+    $result = mysqli_query($conn, $sql); // Execute query
 
     if ($result && mysqli_num_rows($result) === 1) {
-        return mysqli_fetch_assoc($result);
+        return mysqli_fetch_assoc($result); // Return user record
     }
     return false;
 }
 
-/* =========================
-   UPDATE USER
-========================= */
-function updateUser($user) {
+// UPDATE USER DETAILS
+function updateUser($user) { // $user is associative array with updated user details
     $conn = getConnection();
 
     $id        = intval($user['id']);
@@ -95,7 +85,7 @@ function updateUser($user) {
     $gender    = mysqli_real_escape_string($conn, $user['gender']);
     $dob       = mysqli_real_escape_string($conn, $user['dob']);
 
-    $sql = "UPDATE users SET
+    $sql = "UPDATE users SET 
         full_name='$full_name',
         mobile='$mobile',
         gender='$gender',
@@ -105,9 +95,7 @@ function updateUser($user) {
     return mysqli_query($conn, $sql);
 }
 
-/* =========================
-   UPDATE PASSWORD
-========================= */
+// UPDATE USER PASSWORD
 function updatePassword($id, $newPassword) {
     $conn = getConnection();
     $id = intval($id);
@@ -117,9 +105,7 @@ function updatePassword($id, $newPassword) {
     return mysqli_query($conn, $sql);
 }
 
-/* =========================
-   DELETE USER
-========================= */
+// DELETE USER BY ID
 function deleteUser($id) {
     $conn = getConnection();
     $id = intval($id);
@@ -129,9 +115,7 @@ function deleteUser($id) {
 }
 
 
-/* =========================
-   CHECK EMAIL EXISTS
-========================= */
+// CHECK IF EMAIL EXISTS
 function emailExists($email) {
     $conn = getConnection();
     $email = mysqli_real_escape_string($conn, $email);

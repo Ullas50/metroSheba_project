@@ -1,18 +1,20 @@
 <?php
+// Include database connection file
 require_once __DIR__ . '/../core/db.php';
 
-class Admin {
-    private $conn;
 
+
+// Admin model class
+class Admin {
+    private $conn;   // Store database connection
+ // Create database connection when object is created
     public function __construct() {
         $this->conn = getConnection();
     }
 
-    /* =========================
-       PASSENGER BOOKINGS (CONFIRMED)
-    ========================= */
+       // Get all confirmed passenger bookings
     public function getPassengers() {
-    $sql = "
+    $sql = " // SQL query to fetch passenger booking data
         SELECT 
             b.id AS booking_id,
             u.full_name,
@@ -30,13 +32,13 @@ class Admin {
           AND u.role = 'customer'
         ORDER BY b.id DESC
     ";
+
+        // Return all rows as array
     return $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
 }
 
 
-    /* =========================
-       SELLER TICKETS (PAID)
-    ========================= */
+      // Get all paid seller ticket sales
     public function getSellerTickets() {
         $sql = "
             SELECT
@@ -54,15 +56,14 @@ class Admin {
             WHERE s.payment_status = 'paid'
             ORDER BY s.id DESC
         ";
-        return $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+        return $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);    // Return sales data
     }
 
-    /* =========================
-       DELETE PASSENGER BOOKING
-    ========================= */
+     // Delete a passenger booking
     public function deleteBooking($id) {
-        $this->conn->begin_transaction();
+        $this->conn->begin_transaction();    // Start database transaction
         try {
+            // Delete related payment record
             $stmt = $this->conn->prepare("DELETE FROM payments WHERE booking_id = ?");
             $stmt->bind_param("i", $id);
             $stmt->execute();
@@ -74,25 +75,22 @@ class Admin {
             $this->conn->commit();
             return true;
         } catch (Exception $e) {
+            // Undo changes if error occurs
             $this->conn->rollback();
             return false;
         }
     }
 
-    /* =========================
-       DELETE SELLER SALE
-    ========================= */
+    // Delete a seller ticket sale
     public function deleteSellerSale($id) {
-        $stmt = $this->conn->prepare("DELETE FROM seller_sales WHERE id = ?");
+        $stmt = $this->conn->prepare("DELETE FROM seller_sales WHERE id = ?");    // Prepare delete query
         $stmt->bind_param("i", $id);
-        return $stmt->execute();
+        return $stmt->execute();    // Execute delete
     }
 
-    /* =========================
-       🔥 ROUTE-WISE SALES (FINAL)
-    ========================= */
+    // Get sales grouped by route
     public function getRouteSales() {
-        $sql = "
+        $sql = " // SQL query combining passenger and seller sales
             SELECT
                 s1.station_name AS from_station,
                 s2.station_name AS to_station,
@@ -118,12 +116,10 @@ class Admin {
             GROUP BY x.from_station_id, x.to_station_id
             ORDER BY revenue DESC
         ";
-        return $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+        return $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);  // Return route sales data
     }
 
-    /* =========================
-       🔥 GRAND TOTAL (SINGLE SOURCE)
-    ========================= */
+    // Get total revenue from all sales
     public function getGrandTotal() {
         $sql = "
             SELECT SUM(total_price) AS total
@@ -133,12 +129,12 @@ class Admin {
                 SELECT total_price FROM seller_sales WHERE payment_status='paid'
             ) all_sales
         ";
-        return (int)$this->conn->query($sql)->fetch_assoc()['total'];
+        return (int)$this->conn->query($sql)->fetch_assoc()['total']; // Return total revenue
     }
 
-
+ // Get full passenger booking details
     public function getPassengerDetails($bookingId) {
-    $stmt = $this->conn->prepare("
+    $stmt = $this->conn->prepare("  // Prepare passenger details query
         SELECT
             u.full_name,
             u.email,
@@ -167,11 +163,11 @@ class Admin {
 
     $stmt->bind_param("i", $bookingId);
     $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
+    return $stmt->get_result()->fetch_assoc(); // Return passenger data
 }
-
+ // Get full seller sale details
 public function getSellerSaleDetails($saleId) {
-    $stmt = $this->conn->prepare("
+    $stmt = $this->conn->prepare(" // Prepare seller sale details query
         SELECT
             u.full_name,
             u.email,
@@ -199,7 +195,7 @@ public function getSellerSaleDetails($saleId) {
 
     $stmt->bind_param("i", $saleId);
     $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
+    return $stmt->get_result()->fetch_assoc(); // Return seller sale data
 }
 
 
