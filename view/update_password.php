@@ -14,14 +14,13 @@ unset($_SESSION['errors']);
 <body>
 
 <div class="password-container">
-
 <form class="password-card"
       method="POST"
       action="../controller/update_password_controller.php">
 
     <h2>Update Password</h2>
 
-    <!-- CURRENT PASSWORD -->
+    <!--current pass field-->
     <div class="form-group <?= isset($errors['current_password']) ? 'error' : '' ?>">
         <label>Current Password</label>
         <input type="password" name="current_password">
@@ -30,7 +29,7 @@ unset($_SESSION['errors']);
         <?php endif; ?>
     </div>
 
-    <!-- NEW PASSWORD -->
+    <!--new pass-->
     <div class="form-group <?= isset($errors['new_password']) ? 'error' : '' ?>">
         <label>New Password</label>
         <input type="password" name="new_password">
@@ -39,7 +38,7 @@ unset($_SESSION['errors']);
         <?php endif; ?>
     </div>
 
-    <!-- CONFIRM PASSWORD -->
+    <!--confirm pass-->
     <div class="form-group <?= isset($errors['confirm_password']) ? 'error' : '' ?>">
         <label>Re-enter New Password</label>
         <input type="password" name="confirm_password">
@@ -54,8 +53,6 @@ unset($_SESSION['errors']);
     </div>
 
 </form>
-
 </div>
-
 </body>
 </html>

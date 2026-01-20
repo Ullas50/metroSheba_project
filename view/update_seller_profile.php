@@ -43,7 +43,7 @@ unset($_SESSION['profile_error']);
         <div class="alert error"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
 
-    <!-- PROFILE IMAGE -->
+    <!-- profile pic -->
     <div class="image-section">
         <img
             src="../public/uploads/<?= htmlspecialchars($user['photo'] ?: 'default.png') ?>"
@@ -56,19 +56,19 @@ unset($_SESSION['profile_error']);
         </label>
     </div>
 
-    <!-- FULL NAME (LOCKED) -->
+    <!--full name -->
     <div class="form-group">
         <label>Full Name</label>
         <input type="text" value="<?= htmlspecialchars($user['full_name']) ?>" readonly>
     </div>
 
-    <!-- PRIMARY MOBILE (LOCKED) -->
+    <!-- primary mob num -->
     <div class="form-group">
         <label>Primary Mobile</label>
         <input type="text" value="<?= htmlspecialchars($user['mobile']) ?>" readonly>
     </div>
 
-    <!-- ALT MOBILE -->
+    <!-- alt mob num-->
     <div class="form-group">
         <label>Alternative Mobile</label>
         <input type="text"
@@ -81,7 +81,7 @@ unset($_SESSION['profile_error']);
                 </small>
     </div>
 
-    <!-- GENDER & DOB (LOCKED) -->
+    <!--gender & dob-->
     <div class="form-row">
         <div class="form-group">
             <label>Gender</label>
@@ -94,18 +94,13 @@ unset($_SESSION['profile_error']);
         </div>
     </div>
 
-    <!-- ACTIONS -->
+    <!--action-->
     <div class="form-actions">
         <button type="submit" class="btn-confirm">Confirm</button>
         <a href="profile_seller.php" class="btn-cancel">Cancel</a>
     </div>
-
-   
-
 </form>
-
 </div>
-
 <script src="../public/js/profile_preview.js"></script>
 <?php include 'partials/footer.php'; ?>
 </body>

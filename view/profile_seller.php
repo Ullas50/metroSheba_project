@@ -2,16 +2,17 @@
 session_start();
 require_once '../model/User.php';
 
-/* AUTH GUARD */
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) 
+{
     header("Location: login.php");
     exit;
 }
 
-/* FETCH LOGGED-IN USER */
+//fetch logged in user data
 $user = fetchUserById($_SESSION['user_id']);
 
-if (!$user) {
+if (!$user)
+ {
     echo "User not found";
     exit;
 }
@@ -32,7 +33,7 @@ if (!$user) {
 
     <div class="profile-card">
 
-        <!-- PROFILE PHOTO -->
+        <!--profile photo-->
         <div class="profile-photo">
             <?php if (!empty($user['photo'])): ?>
                 <img src="../public/uploads/<?= htmlspecialchars($user['photo']) ?>" alt="Profile Photo">
@@ -41,13 +42,14 @@ if (!$user) {
             <?php endif; ?>
         </div>
 
-        <!-- NAME -->
+        <!--name-->
         <h2><?= htmlspecialchars($user['full_name']) ?></h2>
 
-        <!-- USER INFO -->
+        <!--user info-->
         <div class="profile-info">
             <p><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
             <p><strong>Mobile:</strong> <?= htmlspecialchars($user['mobile']) ?></p>
+           <!-- alt mobile-->
             <?php if (!empty($user['alt_mobile'])): ?>
     <p>
         <strong>Alternative Mobile:</strong>
@@ -60,19 +62,15 @@ if (!$user) {
             <p><strong>Gender:</strong> <?= htmlspecialchars($user['gender']) ?></p>
         </div>
 
-        <!-- ACTION -->
+        <!--action-->
         <div class="profile-actions">
     <a href="update_seller_profile.php" class="btn-profile">
         Update Profile
     </a>
-
     <a href="update_seller_password.php" class="btn-password">
         Update Password
     </a>
 </div>
-
-
-
     </div>
 
 </div>
