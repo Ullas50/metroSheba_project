@@ -18,8 +18,6 @@ header("Pragma: no-cache");
 
     <link rel="stylesheet" href="../public/css/seller.css">
     <link rel="stylesheet" href="../public/css/home.css">
-
-
 </head>
 <body>
 
@@ -33,28 +31,36 @@ header("Pragma: no-cache");
         <p class="subtitle">Enter journey details</p>
 
         <form id="sellerForm" novalidate>
+
             <div class="field">
                 <label>From</label>
                 <select id="from" name="from"></select>
+                <!-- ADDED -->
+                <small class="error" id="fromError"></small>
             </div>
 
             <div class="field">
                 <label>To</label>
                 <select id="to" name="to"></select>
+                <!-- ADDED -->
+                <small class="error" id="toError"></small>
             </div>
 
             <div class="field">
                 <label>Journey Date</label>
                 <input type="date" id="journey_date" name="journey_date">
+                <!-- ADDED -->
+                <small class="error" id="dateError"></small>
             </div>
 
             <div class="field">
                 <label>Quantity</label>
                 <input type="number" id="quantity" name="quantity" value="1" min="1" max="10">
+                <!-- ADDED -->
+                <small class="error" id="qtyError"></small>
             </div>
-        </form>
 
-        <div class="error" id="serverErr"></div>
+        </form>
     </div>
 
     <!--summary-->
@@ -89,13 +95,13 @@ header("Pragma: no-cache");
         <div class="summary-note">Total Fare</div>
 
         <!--pay btn-->
-       <button id="payBtn" type="button" class="pay-btn">
-    Proceed to Payment
-</button>
-
+        <button id="payBtn" type="button" class="pay-btn">
+            Proceed to Payment
+        </button>
     </div>
 
 </div>
+
 <script src="../public/js/seller.js"></script>
 <?php include 'partials/footer.php'; ?>
 </body>
