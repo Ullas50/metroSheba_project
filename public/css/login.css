@@ -1,6 +1,4 @@
-/* =========================
-   ROOT VARIABLES
-========================= */
+
 :root {
     --metro-blue: #1e88e5;
     --metro-blue-dark: #1565c0;
@@ -8,9 +6,6 @@
     --text-dark: #222;
 }
 
-/* =========================
-   GLOBAL RESET
-========================= */
 * {
     margin: 0;
     padding: 0;
@@ -28,9 +23,7 @@ body {
     flex-direction: column;
 }
 
-/* =========================
-   PAGE STRUCTURE
-========================= */
+
 .page-wrapper {
     flex: 1;
     display: flex;
@@ -42,9 +35,6 @@ body {
     min-height: 100vh;
 }
 
-/* =========================
-   LEFT IMAGE PANEL
-========================= */
 .login-image {
     width: 50%;
     background:
@@ -79,9 +69,6 @@ body {
     opacity: 0.9;
 }
 
-/* =========================
-   RIGHT FORM PANEL
-========================= */
 .login-form-container {
     width: 50%;
     padding: 60px;
@@ -111,9 +98,6 @@ body {
     margin-bottom: 25px;
 }
 
-/* =========================
-   LABELS
-========================= */
 .login-form-container label {
     font-weight: 600;
     margin-bottom: 6px;
@@ -121,9 +105,6 @@ body {
     color: var(--text-dark);
 }
 
-/* =========================
-   INPUTS
-========================= */
 input[type="text"],
 input[type="password"] {
     width: 100%;
@@ -152,9 +133,6 @@ input[type="password"]:focus {
     animation: focusPulse 1.6s ease infinite;
 }
 
-/* =========================
-   PASSWORD TOGGLE
-========================= */
 .password-wrapper {
     position: relative;
 }
@@ -181,9 +159,7 @@ input[type="password"]:focus {
     transform: translateY(-50%) scale(1.2) rotate(-8deg);
 }
 
-/* =========================
-   ERROR MESSAGE
-========================= */
+
 .form-error {
     background: #fdecea;
     color: #b71c1c;
@@ -195,9 +171,7 @@ input[type="password"]:focus {
     animation: shake 0.35s ease;
 }
 
-/* =========================
-   REMEMBER ME
-========================= */
+
 .remember-row {
     margin: 10px 0 18px;
 }
@@ -225,9 +199,7 @@ input[type="password"]:focus {
     cursor: pointer;
 }
 
-/* =========================
-   LOGIN BUTTON
-========================= */
+
 button {
     width: 100%;
     padding: 13px;
@@ -273,9 +245,7 @@ button:active {
     box-shadow: 0 4px 10px rgba(0,0,0,0.18);
 }
 
-/* =========================
-   LINKS
-========================= */
+
 .links {
     margin-top: 18px;
     text-align: center;
@@ -310,9 +280,7 @@ button:active {
     transform: scaleX(1);
 }
 
-/* =========================
-   KEYFRAMES
-========================= */
+
 @keyframes fadeSlideLeft {
     from { opacity: 0; transform: translateX(-50px); }
     to   { opacity: 1; transform: translateX(0); }
@@ -352,9 +320,7 @@ button:active {
     100% { transform: translateX(0); }
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+
 @media (max-width: 900px) {
     .login-page {
         flex-direction: column;
@@ -369,9 +335,6 @@ button:active {
     }
 }
 
-/* =========================
-   FORCE ERROR VISIBILITY
-========================= */
 .form-error {
     display: block;
     opacity: 1 !important;

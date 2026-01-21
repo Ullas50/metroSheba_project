@@ -124,9 +124,6 @@ body {
     color: #555;
     text-decoration: none;
 }
-/* ===============================
-   PRIMARY ACTION BUTTON (CONFIRM / UPDATE PASSWORD)
-=============================== */
 
 .btn-confirm,
 .btn-password {

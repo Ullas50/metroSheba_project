@@ -7,9 +7,7 @@ function isAjax() {
            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 }
 
-/* =====================
-   AUTH CHECK
-===================== */
+/* AUTH CHECK */
 if (
     !isset($_SESSION['user_id']) ||
     $_SESSION['role'] !== 'seller' ||
@@ -25,18 +23,14 @@ if (
     exit('Unauthorized');
 }
 
-/* =====================
-   DATA
-===================== */
+/* DATA */
 $sellerId = (int) $_SESSION['user_id'];
 $data     = $_SESSION['seller_payment'];
 
 $received = (int) ($_POST['received_amount'] ?? 0);
 $amount   = (int) $data['amount'];
 
-/* =====================
-   VALIDATION
-===================== */
+/* VALIDATION */
 if ($received !== $amount) {
 
     if (isAjax()) {
@@ -52,9 +46,7 @@ if ($received !== $amount) {
     exit;
 }
 
-/* =====================
-   DB INSERT
-===================== */
+/* DB INSERT */
 $conn = getConnection();
 
 $stmt = $conn->prepare(
@@ -80,9 +72,7 @@ $stmt->execute();
 $_SESSION['seller_ticket_id'] = $conn->insert_id;
 unset($_SESSION['seller_payment']);
 
-/* =====================
-   SUCCESS RESPONSE
-===================== */
+/* SUCCESS RESPONSE */
 if (isAjax()) {
     echo json_encode([
         'status'   => 'success',

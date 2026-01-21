@@ -265,7 +265,7 @@ small.error {
     display: block;
 }
 
-/* ================= FOOTER ================= */
+
 .footer {
     background: linear-gradient(90deg, #1f3a5f, #2b5aa0);
     padding: 22px 0;
@@ -278,7 +278,7 @@ small.error {
     align-items: center;
 }
 
-/* ================= RESPONSIVE ================= */
+
 @media (max-width: 900px) {
     .main-section {
         flex-direction: column;

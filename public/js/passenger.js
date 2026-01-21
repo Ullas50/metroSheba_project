@@ -11,11 +11,10 @@ const toError = document.getElementById("toError");
 const dateError = document.getElementById("dateError");
 const qtyError = document.getElementById("qtyError");
 
-// ================= INITIAL =================
 from.innerHTML = `<option value="" disabled selected hidden>Select Departure Station</option>`;
 to.innerHTML   = `<option value="" disabled selected hidden>Select Arrival Station</option>`;
 
-// ================= LOAD STATIONS =================
+
 fetch("../controller/GetStations.php")
     .then(res => res.json())
     .then(stations => {
@@ -25,7 +24,6 @@ fetch("../controller/GetStations.php")
         });
     });
 
-// ================= PRICE CALCULATION =================
 function calculatePrice() {
     if (!from.value || !to.value || from.value === to.value) {
         totalPrice.textContent = "৳0";
@@ -43,7 +41,7 @@ function calculatePrice() {
     el.addEventListener("change", calculatePrice)
 );
 
-// ================= QUANTITY CONTROL =================
+
 
 // Disable mouse wheel
 qtyInput.addEventListener("wheel", e => e.preventDefault());
@@ -55,12 +53,12 @@ qtyInput.addEventListener("input", () => {
     calculatePrice();
 });
 
-// ================= CLEAR FIELD-SPECIFIC ERRORS =================
+
 from.addEventListener("change", () => fromError.textContent = "");
 to.addEventListener("change", () => toError.textContent = "");
 dateInput.addEventListener("change", () => dateError.textContent = "");
 
-// ================= SUBMIT =================
+
 document.getElementById("bookingForm").addEventListener("submit", async e => {
     e.preventDefault();
 
@@ -107,7 +105,6 @@ document.getElementById("bookingForm").addEventListener("submit", async e => {
 
     if (hasError) return;
 
-    // ================= AJAX SUBMIT =================
     const formData = new FormData(e.target);
 
     const res = await fetch("../controller/BookingController.php", {
@@ -145,6 +142,5 @@ document.getElementById("bookingForm").addEventListener("submit", async e => {
         return;
     }
 
-    // ================= SUCCESS =================
     window.location.href = "../controller/PaymentController.php";
 });

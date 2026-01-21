@@ -1,4 +1,4 @@
-// ================= ELEMENTS =================
+
 const from = document.getElementById("from");
 const to = document.getElementById("to");
 const dateInput = document.getElementById("journey_date");
@@ -20,11 +20,9 @@ const qtyError  = document.getElementById("qtyError");
 
 const PRICE_PER_STATION = 10;
 
-// ================= INIT =================
 from.innerHTML = `<option value="" disabled selected hidden>Select Departure Station</option>`;
 to.innerHTML   = `<option value="" disabled selected hidden>Select Arrival Station</option>`;
 
-// ================= LOAD STATIONS =================
 fetch("../controller/GetStations.php")
     .then(res => res.json())
     .then(stations => {
@@ -37,7 +35,6 @@ fetch("../controller/GetStations.php")
         });
     });
 
-// ================= SUMMARY =================
 function updateSummary() {
     if (!from.value || !to.value || from.value === to.value) {
         sFrom.textContent = "—";
@@ -69,7 +66,6 @@ function updateSummary() {
     el.addEventListener("change", updateSummary)
 );
 
-// ================= SUBMIT =================
 payBtn.addEventListener("click", async (e) => {
     e.preventDefault();
 

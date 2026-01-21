@@ -1,7 +1,6 @@
 // 🔒 ADDITION 1 — ensure DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
 
-// ================= PAYMENT METHOD SELECTION =================
 let selectedMethod = null;
 
 document.querySelectorAll(".payment-methods button").forEach(btn => {
@@ -48,7 +47,6 @@ if (proceedBtn) {
     });
 }
 
-// ================= PAYMENT FORM SUBMIT =================
 const paymentForm = document.querySelector("form");
 
 if (paymentForm) {
@@ -76,7 +74,6 @@ if (paymentForm) {
     });
 }
 
-// ================= ERROR HANDLING =================
 function showPaymentError(msg) {
     const inputGroup = document.querySelector(".input-group");
     if (!inputGroup) return;
@@ -92,6 +89,4 @@ function showPaymentError(msg) {
     box.textContent = msg;
 }
 
-
-// 🔒 ADDITION 1 CLOSE
 });

@@ -2,17 +2,13 @@
 session_start();
 require_once "../model/user.php";
 
-/* =========================
-   HELPER: detect AJAX
-========================= */
+/*detect AJAX */
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 }
 
-/* =========================
-   ERROR HANDLER
-========================= */
+/* ERROR HANDLER */
 function redirectWithError($msg) {
 
     // AJAX response
@@ -30,9 +26,7 @@ function redirectWithError($msg) {
     exit;
 }
 
-/* =========================
-   MAIN LOGIC
-========================= */
+/*MAIN LOGIC */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($_POST['email'])) {
@@ -57,9 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirectWithError("Incorrect password");
     }
 
-    /* =========================
-       LOGIN SUCCESS
-    ========================= */
+    /* LOGIN SUCCESS */
     $_SESSION['logged_in'] = true;
     $_SESSION['user_id']   = $user['id'];
     $_SESSION['full_name'] = $user['full_name'];
@@ -81,9 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         setcookie('remember_email', '', time() - 3600, '/');
     }
 
-    /* =========================
-       AJAX SUCCESS RESPONSE
-    ========================= */
+    /* AJAX SUCCESS RESPONSE */
     if (isAjaxRequest()) {
 
         // decide redirect URL
@@ -102,9 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    /* =========================
-       NORMAL REDIRECT (UNCHANGED)
-    ========================= */
+    /* NORMAL REDIRECT */
     if ($user['role'] === 'admin') {
         header("Location: ../view/admin_dashboard.php");
     } elseif ($user['role'] === 'seller') {

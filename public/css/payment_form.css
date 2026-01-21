@@ -165,9 +165,6 @@ small.error {
     width: 100%;
 }
 
-/* =============================
-   PAYMENT ERROR POSITION FIX
-============================= */
 
 /* Ensure error stays under input */
 .input-group {
