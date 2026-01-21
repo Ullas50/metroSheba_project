@@ -41,8 +41,16 @@ $errors = [];
 
 /* VALIDATION (UNCHANGED) */
 if ($altMobile !== '') {
+
+    // must be exactly 11 digits
     if (strlen($altMobile) !== 11) {
         $errors['alt_mobile'] = "Alternative number must be exactly 11 digits";
+
+    // must match Bangladesh mobile format
+    } elseif (!preg_match('/^01[3-9][0-9]{8}$/', $altMobile)) {
+        $errors['alt_mobile'] = "Invalid mobile number format";
+
+    // must not match primary number
     } elseif ($altMobile === $user['mobile']) {
         $errors['alt_mobile'] = "Alternative number cannot be same as primary number";
     }

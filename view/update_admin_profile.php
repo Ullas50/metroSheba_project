@@ -82,7 +82,7 @@ unset($_SESSION['profile_error']);
                name="alt_mobile"
                value="<?= htmlspecialchars($user['alt_mobile'] ?? '') ?>"
                placeholder="Optional">
-        <small class="hint">Must be different from primary number</small>
+        <small class="hint">Must be different from primary number</small> <br>
         <small class="error-text">
             <?= htmlspecialchars($errors['alt_mobile'] ?? '') ?>
         </small>
