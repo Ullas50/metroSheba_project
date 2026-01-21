@@ -23,27 +23,28 @@ unset($_SESSION['profile_error']);
 <head>
     <meta charset="UTF-8">
     <title>MetroSheba | Update Profile</title>
+    
+    <link rel="stylesheet" href="../public/css/home.css">
     <link rel="stylesheet" href="../public/css/update_profile.css">
-     <link rel="stylesheet" href="../public/css/home.css">
 </head>
 <body>
 
 <?php include 'partials/header1.php'; ?>
-<!--profile  update form-->
-<div class="update-container">
 
-<form class="update-card"
+<div class="update-container">
+<form id="profileForm"
+      class="update-card"
       method="POST"
       action="../controller/profile_update_controller.php"
       enctype="multipart/form-data">
 
     <h2>Update Profile</h2>
-<!--display general err-->
-    <?php if ($error): ?>
-        <div class="alert error"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
 
-    <!--profile pic-->
+    <div class="alert error" id="generalError">
+        <?= htmlspecialchars($error) ?>
+    </div>
+
+    <!-- profile pic -->
     <div class="image-section">
         <img
             src="../public/uploads/<?= htmlspecialchars($user['photo'] ?: 'default.png') ?>"
@@ -56,19 +57,16 @@ unset($_SESSION['profile_error']);
         </label>
     </div>
 
-    <!--full name-->
     <div class="form-group">
         <label>Full Name</label>
         <input type="text" value="<?= htmlspecialchars($user['full_name']) ?>" readonly>
     </div>
 
-    <!--primary mob num-->
     <div class="form-group">
         <label>Primary Mobile</label>
         <input type="text" value="<?= htmlspecialchars($user['mobile']) ?>" readonly>
     </div>
 
-    <!--alt mob num-->
     <div class="form-group">
         <label>Alternative Mobile</label>
         <input type="text"
@@ -76,12 +74,12 @@ unset($_SESSION['profile_error']);
                value="<?= htmlspecialchars($user['alt_mobile'] ?? '') ?>"
                placeholder="Optional">
         <small class="hint">Must be different from primary number</small>
-        <small class="error">
-                    <?= htmlspecialchars($errors['alt_mobile'] ?? '') ?>
-                </small>
+        <br>
+        <small class="error-text">
+            <?= htmlspecialchars($errors['alt_mobile'] ?? '') ?>
+        </small>
     </div>
 
-    <!--gender & dob-->
     <div class="form-row">
         <div class="form-group">
             <label>Gender</label>
@@ -94,16 +92,16 @@ unset($_SESSION['profile_error']);
         </div>
     </div>
 
-    <!--action-->
     <div class="form-actions">
         <button type="submit" class="btn-confirm">Confirm</button>
         <a href="profile.php" class="btn-cancel">Cancel</a>
     </div>
 </form>
-
 </div>
-<!--js for live profile pic preview when select a new file-->
+
+<script src="../public/js/profile_update.js"></script>
 <script src="../public/js/profile_preview.js"></script>
+
 <?php include 'partials/footer.php'; ?>
 </body>
 </html>

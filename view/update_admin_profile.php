@@ -5,18 +5,18 @@ $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['errors']);
 require_once '../model/User.php';
 
-if (!isset($_SESSION['user_id'])) 
-{
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
+
 //fetch user data by id from db
 $user = fetchUserById($_SESSION['user_id']);
-if (!$user) 
-{
+if (!$user) {
     echo "User not found";
     exit;
 }
+
 //profile specific err msg
 $error = $_SESSION['profile_error'] ?? '';
 unset($_SESSION['profile_error']);
@@ -26,22 +26,26 @@ unset($_SESSION['profile_error']);
 <head>
     <meta charset="UTF-8">
     <title>MetroSheba | Update Profile</title>
+
+    <!-- SAME ORDER AS PASSENGER -->
+    <link rel="stylesheet" href="../public/css/home.css">
     <link rel="stylesheet" href="../public/css/update_profile.css">
-     <link rel="stylesheet" href="../public/css/home.css">
 </head>
 <body>
 
 <?php include 'partials/header3.php'; ?>
-<!--profile update form-->
+
 <div class="update-container">
 
-<form class="update-card"
+<form id="profileForm"
+      class="update-card"
       method="POST"
       action="../controller/profile_update_controller_admin.php"
       enctype="multipart/form-data">
 
     <h2>Update Profile</h2>
-<!--display general err msg-->
+
+    <!--display general err msg-->
     <?php if ($error): ?>
         <div class="alert error"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
@@ -79,10 +83,9 @@ unset($_SESSION['profile_error']);
                value="<?= htmlspecialchars($user['alt_mobile'] ?? '') ?>"
                placeholder="Optional">
         <small class="hint">Must be different from primary number</small>
-         <small class="error">
-    <?= htmlspecialchars($errors['alt_mobile'] ?? '') ?>
-</small>
-
+        <small class="error-text">
+            <?= htmlspecialchars($errors['alt_mobile'] ?? '') ?>
+        </small>
     </div>
 
     <!--gender & dob-->
@@ -103,9 +106,14 @@ unset($_SESSION['profile_error']);
         <button type="submit" class="btn-confirm">Confirm</button>
         <a href="admin_profile.php" class="btn-cancel">Cancel</a>
     </div>
+
 </form>
 </div>
+
+<!-- SAME JS AS PASSENGER -->
+<script src="../public/js/profile_update.js"></script>
 <script src="../public/js/profile_preview.js"></script>
+
 <?php include 'partials/footer.php'; ?>
 </body>
 </html>

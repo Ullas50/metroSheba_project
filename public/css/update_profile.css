@@ -223,3 +223,15 @@ body {
     box-shadow: 0 8px 18px rgba(0,0,0,0.15);
 }
 
+.form-group .error-text {
+    color: red !important;
+}
+
+
+
+
+
+
+
+
+
