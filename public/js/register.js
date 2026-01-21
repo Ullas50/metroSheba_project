@@ -1,7 +1,5 @@
 //GLOBAL STAte
-
-
-  // CACHE ELEMENTS (DO NOT RELY ON GLOBAL IDS)
+// CACHE ELEMENTS (DO NOT RELY ON GLOBAL IDS)
 
 const form = document.getElementById("registrationForm");
 const firstName = document.getElementById("firstName");

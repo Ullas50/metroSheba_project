@@ -38,6 +38,7 @@ $qrData = json_encode([
     <meta charset="UTF-8">
     <title>MetroSheba | E-Ticket</title>
     <link rel="stylesheet" href="../public/css/ticket.css">
+    <link rel="stylesheet" href="../public/css/ticket_seller.css">
 </head>
 <body>
 
