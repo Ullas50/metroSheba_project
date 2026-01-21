@@ -77,25 +77,12 @@ session_start();//for login and error msg
     </div>
 </div>
 <script src="../public/js/loginValidation.js"></script>
+<script src="../public/js/login.js"></script>
 <?php include 'partials/footer.php'; ?>
 </body>
 
-<script>
-document.getElementById("togglePassword").addEventListener("click", function () {
-    const passwordInput = document.getElementById("password");
 
-    if (passwordInput.type === "password") 
-        {
-        passwordInput.type = "text";
-        this.textContent = "🙈";
-    } 
-    else 
-    {
-        passwordInput.type = "password";
-        this.textContent = "👁️";
-    }
-});
-</script>
+
 
 
 
