@@ -14,41 +14,48 @@ unset($_SESSION['errors']);
 <body>
 
 <div class="password-container">
-<form class="password-card"
+<form id="passwordForm"
+      class="password-card"
       method="POST"
       action="../controller/update_password_controller_seller.php">
 
     <h2>Update Password</h2>
-    <!--current pass-->
+
+    <!-- current password -->
     <div class="form-group <?= isset($errors['current_password']) ? 'error' : '' ?>">
         <label>Current Password</label>
         <input type="password" name="current_password">
-        <?php if (isset($errors['current_password'])): ?>
-            <small class="error-text"><?= $errors['current_password'] ?></small>
-        <?php endif; ?>
+        <small class="error-text">
+            <?= $errors['current_password'] ?? '' ?>
+        </small>
     </div>
-    <!--new pass-->
+
+    <!-- new password -->
     <div class="form-group <?= isset($errors['new_password']) ? 'error' : '' ?>">
         <label>New Password</label>
         <input type="password" name="new_password">
-        <?php if (isset($errors['new_password'])): ?>
-            <small class="error-text"><?= $errors['new_password'] ?></small>
-        <?php endif; ?>
+        <small class="error-text">
+            <?= $errors['new_password'] ?? '' ?>
+        </small>
     </div>
-    <!--confirm pass-->
+
+    <!-- confirm password -->
     <div class="form-group <?= isset($errors['confirm_password']) ? 'error' : '' ?>">
         <label>Re-enter New Password</label>
         <input type="password" name="confirm_password">
-        <?php if (isset($errors['confirm_password'])): ?>
-            <small class="error-text"><?= $errors['confirm_password'] ?></small>
-        <?php endif; ?>
+        <small class="error-text">
+            <?= $errors['confirm_password'] ?? '' ?>
+        </small>
     </div>
+
     <div class="form-actions">
-        <button type="submit" class="btn-confirm">Confirm</button>
+        <button type="submit" class="btn-confirm" name="submit">Confirm</button>
         <a href="update_seller_profile.php" class="btn-cancel">Back</a>
     </div>
 
 </form>
 </div>
+
+<script src="../public/js/update_password.js"></script>
 </body>
 </html>
