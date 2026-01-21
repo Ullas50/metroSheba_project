@@ -1,8 +1,11 @@
+// 🔒 ADDITION 1 — ensure DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+
+// ================= PAYMENT METHOD SELECTION =================
 let selectedMethod = null;
-// When a payment method button is clicked
+
 document.querySelectorAll(".payment-methods button").forEach(btn => {
     btn.addEventListener("click", () => {
- // Remove "active" from all buttons
         document
             .querySelectorAll(".payment-methods button")
             .forEach(b => b.classList.remove("active"));
@@ -14,24 +17,81 @@ document.querySelectorAll(".payment-methods button").forEach(btn => {
     });
 });
 
-document.getElementById("proceedBtn").addEventListener("click", () => {
-    if (!selectedMethod) {
-        alert("Please select a payment method");
-        return;
+const proceedBtn = document.getElementById("proceedBtn");
+
+if (proceedBtn) {
+    proceedBtn.addEventListener("click", async () => {
+        showPaymentError("");
+
+        if (!selectedMethod) {
+            showPaymentError("Please select a payment method");
+            return;
+        }
+
+        const res = await fetch("../controller/SelectPaymentMethod.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: "method=" + encodeURIComponent(selectedMethod)
+        });
+
+        const result = await res.text();
+
+        if (result === "OK") {
+            window.location.href = "payment_form.php";
+            return;
+        }
+
+        showPaymentError(result);
+    });
+}
+
+// ================= PAYMENT FORM SUBMIT =================
+const paymentForm = document.querySelector("form");
+
+if (paymentForm) {
+    paymentForm.addEventListener("submit", async e => {
+        e.preventDefault();
+        e.stopPropagation(); // 🔒 ADDITION 2 — HARD BLOCK reload
+        showPaymentError("");
+
+        const res = await fetch(paymentForm.action, {
+            method: "POST",
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: new FormData(paymentForm)
+        });
+
+        const data = await res.json();
+
+        if (data.status === "error") {
+            showPaymentError(data.message);
+            return;
+        }
+
+        window.location.href = data.redirect;
+    });
+}
+
+// ================= ERROR HANDLING =================
+function showPaymentError(msg) {
+    const inputGroup = document.querySelector(".input-group");
+    if (!inputGroup) return;
+
+    let box = inputGroup.querySelector(".payment-error");
+
+    if (!box) {
+        box = document.createElement("small");
+        box.className = "payment-error error";
+        inputGroup.appendChild(box);
     }
 
-    // Send the selected method to the server
-    fetch("../controller/SelectPaymentMethod.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: "method=" + encodeURIComponent(selectedMethod)
-    })
-    .then(res => res.text())
-    .then(res => {
-        if (res === "OK") {
-            window.location.href = "payment_form.php";
-        } else {
-            alert(res);
-        }
-    });
+    box.textContent = msg;
+}
+
+
+// 🔒 ADDITION 1 CLOSE
 });

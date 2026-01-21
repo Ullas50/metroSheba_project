@@ -13,42 +13,52 @@ unset($_SESSION['payment_error']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>MetroSheba | Payment</title>
     <link rel="stylesheet" href="../public/css/payment_form.css">
 </head>
+
 <body>
-<div class="payment-container">
-    <div class="payment-card">
 
-        <h1 class="brand">MetroSheba</h1>
-        <h2 class="method"><?= $method ?> Payment</h2>
-        <p class="amount">Please pay ৳<?= $amount ?></p>
+    <div class="payment-container">
+        <div class="payment-card">
 
-        <form method="POST" action="../controller/ConfirmPayment.php" novalidate>
+            <h1 class="brand">MetroSheba</h1>
+            <h2 class="method"><?= $method ?> Payment</h2>
+            <p class="amount">Please pay ৳<?= $amount ?></p>
 
-            <div class="input-group">
-                <label>Mobile Number</label>
-                <input
-                    type="number"
-                    name="mobile"
-                    placeholder="01XXXXXXXXX"
-                    class="<?= $error ? 'input-error' : '' ?>"
-                >
+            <form method="POST" action="../controller/ConfirmPayment.php" novalidate>
 
-                <?php if ($error): ?>
-                    <small class="error"><?= htmlspecialchars($error) ?></small>
-                <?php endif; ?>
-            </div>
+                <div class="input-group">
+                    <label for="mobile">Mobile Number</label>
 
-            <div class="actions">
-                <button type="submit" class="confirm-btn">Confirm</button>
-                <a href="passenger_dashboard.php" class="cancel-btn">Cancel</a>
-            </div>
-        </form>
+                    <input
+                        type="text"
+                        id="mobile"
+                        name="mobile"
+                        placeholder="01XXXXXXXXX"
+                        inputmode="numeric"
+                        maxlength="11"
+                        autocomplete="off"
+                        class="<?= !empty($error) ? 'input-error' : '' ?>"
+                        value="<?= htmlspecialchars($_POST['mobile'] ?? '') ?>">
+
+                    <small class="payment-error error">
+                        <?= htmlspecialchars($error ?? '') ?>
+                    </small>
+                </div>
+
+
+                <div class="actions">
+                    <button type="submit" class="confirm-btn">Confirm</button>
+                    <a href="passenger_dashboard.php" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
+    <script src="../public/js/payment.js"></script>
 </body>
+
 </html>
