@@ -51,7 +51,7 @@ if (!$data)
         <div><strong>Sold At:</strong> <?= $data['sold_at'] ?></div>
   
   </div>
-    <a href="admin_dashboard.php" class="back-btn">← Back to Dashboard</a>
+    <a href="admin_dashboard.php" class="back-btn">Back to Dashboard</a>
 
 </div>
 

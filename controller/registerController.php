@@ -2,9 +2,7 @@
 session_start();
 require_once "../model/User.php";
 
-/* ======================================================
-   AJAX: EMAIL CHECK (USED BY EMAIL BLUR)
-====================================================== */
+/*  AJAX: EMAIL CHECK (USED BY EMAIL BLUR) */
 if (
     $_SERVER['REQUEST_METHOD'] === 'POST' &&
     isset($_POST['ajax']) &&
@@ -23,9 +21,7 @@ if (
     exit;
 }
 
-/* ======================================================
-   AJAX: GENERIC FIELD VALIDATION (ALL FIELDS)
-====================================================== */
+/*  AJAX: GENERIC FIELD VALIDATION (ALL FIELDS) */
 if (
     $_SERVER['REQUEST_METHOD'] === 'POST' &&
     isset($_POST['ajax']) &&
@@ -106,9 +102,7 @@ if (
     exit;
 }
 
-/* ======================================================
-   NORMAL FORM SUBMIT (FINAL AUTHORITY)
-====================================================== */
+/* NORMAL FORM SUBMIT (FINAL AUTHORITY) */
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: ../view/register.php");
     exit;
