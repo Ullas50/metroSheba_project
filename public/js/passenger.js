@@ -1,4 +1,4 @@
-// ELEMENTS 
+// ================= ELEMENTS =================
 const from = document.getElementById("from");
 const to = document.getElementById("to");
 const dateInput = document.getElementById("journey_date");
@@ -11,11 +11,11 @@ const toError = document.getElementById("toError");
 const dateError = document.getElementById("dateError");
 const qtyError = document.getElementById("qtyError");
 
-//INITIAL
+// ================= INITIAL =================
 from.innerHTML = `<option value="" disabled selected hidden>Select Departure Station</option>`;
 to.innerHTML   = `<option value="" disabled selected hidden>Select Arrival Station</option>`;
 
-// LOAD STATIONS 
+// ================= LOAD STATIONS =================
 fetch("../controller/GetStations.php")
     .then(res => res.json())
     .then(stations => {
@@ -25,7 +25,7 @@ fetch("../controller/GetStations.php")
         });
     });
 
-//  PRICE CALCulation
+// ================= PRICE CALCULATION =================
 function calculatePrice() {
     if (!from.value || !to.value || from.value === to.value) {
         totalPrice.textContent = "৳0";
@@ -43,37 +43,38 @@ function calculatePrice() {
     el.addEventListener("change", calculatePrice)
 );
 
-// QUANTITY CONTROL 
+// ================= QUANTITY CONTROL =================
 
-// Disable mouse wheel changing number
+// Disable mouse wheel
 qtyInput.addEventListener("wheel", e => e.preventDefault());
 
-// Live calculation ONLY (no forcing, no limit)
+// Quantity live handling
 qtyInput.addEventListener("input", () => {
     qtyError.textContent = "";
+    qtyInput.classList.remove("input-error");
     calculatePrice();
 });
 
-//  CLEAR ERRORS 
-function clearErrors() {
-    fromError.textContent = "";
-    toError.textContent = "";
-    dateError.textContent = "";
-    qtyError.textContent = "";
-}
+// ================= CLEAR FIELD-SPECIFIC ERRORS =================
+from.addEventListener("change", () => fromError.textContent = "");
+to.addEventListener("change", () => toError.textContent = "");
+dateInput.addEventListener("change", () => dateError.textContent = "");
 
-document.querySelectorAll("select, input").forEach(el => {
-    el.addEventListener("input", clearErrors);
-});
-
-// submit
+// ================= SUBMIT =================
 document.getElementById("bookingForm").addEventListener("submit", async e => {
     e.preventDefault();
-    clearErrors();
 
     let hasError = false;
     const qty = parseInt(qtyInput.value);
 
+    // Clear errors
+    fromError.textContent = "";
+    toError.textContent = "";
+    dateError.textContent = "";
+    qtyError.textContent = "";
+    qtyInput.classList.remove("input-error");
+
+    // Frontend validation
     if (!from.value) {
         fromError.textContent = "From station is required";
         hasError = true;
@@ -96,11 +97,17 @@ document.getElementById("bookingForm").addEventListener("submit", async e => {
 
     if (isNaN(qty) || qty < 1) {
         qtyError.textContent = "Quantity must be at least 1";
+        qtyInput.classList.add("input-error");
+        hasError = true;
+    } else if (qty > 10) {
+        qtyError.textContent = "Maximum 10 tickets allowed";
+        qtyInput.classList.add("input-error");
         hasError = true;
     }
 
     if (hasError) return;
 
+    // ================= AJAX SUBMIT =================
     const formData = new FormData(e.target);
 
     const res = await fetch("../controller/BookingController.php", {
@@ -109,10 +116,35 @@ document.getElementById("bookingForm").addEventListener("submit", async e => {
     });
 
     const result = await res.text();
+
     if (result !== "OK") {
-        alert(result);
+
+        if (
+            result.includes("Quantity") ||
+            result.includes("tickets") ||
+            result.includes("at least")
+        ) {
+            qtyError.textContent = result;
+            qtyInput.classList.add("input-error");
+            return;
+        }
+
+        if (result.includes("date")) {
+            dateError.textContent = result;
+            return;
+        }
+
+        if (result.includes("station")) {
+            toError.textContent = result;
+            return;
+        }
+
+        // FINAL fallback — still inline, never alert
+        qtyError.textContent = result;
+        qtyInput.classList.add("input-error");
         return;
     }
 
+    // ================= SUCCESS =================
     window.location.href = "../controller/PaymentController.php";
 });
